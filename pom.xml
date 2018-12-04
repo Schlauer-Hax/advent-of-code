@@ -10,6 +10,10 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>Day_1_Chronal_Calibration</module>
+        <module>Day_2_Inventory_Management_System</module>
+        <module>Day_2_Part_2</module>
+        <module>Day_3_No_Matter_How_You_Slice_It</module>
+        <module>Day_4_Repose_Record</module>
     </modules>
 
 
