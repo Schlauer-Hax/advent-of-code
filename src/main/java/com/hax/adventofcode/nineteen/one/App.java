@@ -1,4 +1,4 @@
-package com.hax.adventofcode.day1;
+package com.hax.adventofcode.nineteen.one;
 
 import java.io.File;
 import java.io.FileNotFoundException;
