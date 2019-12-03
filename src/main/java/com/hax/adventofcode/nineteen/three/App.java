@@ -16,8 +16,9 @@ public class App {
         String wire2 = "L998,U258,R975,U197,R680,D56,R898,D710,R475,U909,L201,D579,L21,U743,R832,D448,R216,D136,R83,U413,R167,U138,R102,U122,L290,D49,L93,D941,L625,U709,R129,D340,L322,D27,R440,U692,R368,D687,L246,D425,R823,U287,L436,U999,R90,U663,R470,U177,R956,D981,L767,D780,R610,D644,R238,D416,R402,D327,L680,D367,L94,D776,L331,D745,R846,D559,R113,U158,R125,D627,L898,D212,L80,D184,L386,U943,R122,D614,L868,D600,R912,U501,R25,D887,R310,U872,L157,U865,L382,U959,R712,D248,L343,U819,L763,U886,R582,D631,L835,U443,L917,D934,L333,U470,R778,U142,R384,U589,R306,U933,L206,D199,L497,D406,L212,U439,L15,U985,R505,D502,R934,D966,R429,U810,R588,U367,L424,U804,R767,U703,R885,U568,R748,U209,L319,U305,L941,D184,R398,U681,L411,U414,L90,U711,L575,D368,L986,U29,R982,U361,L501,D970,R558,D887,L241,U506,R578,D932,R911,U621,L153,U200,L873,U711,L843,U549,R72,U377,R915,D79,L378,U66,L989,D589,L341,D350,L200,D78,R944,U876,L794,U643,R871,D909,L353,D54,R651,U338,R857,D938,R636,D301,R728,U318,R530,D589,L682,U784,L428,D879,L207,D247,L53,U312,L488,D534,L998,U512,L628,D957,L994,D747,L804,U399,L801,D500,R791,D980,R839,U564,L81,U461,R615,U863,R308,D564,R843,U579,R792,D472,R229,D153,L21,D647,R425,D54,L470,U330,R285,D81,L221,U168,R970,D624,R815,U189,L812,U195,L654,U108,R820,U786,L932,U657,L605,D164,L788,D393,L717,D49,R615,D81,L91,U322,L150,D368,R434,D861,L859,D911,R161,U576,L671,U992,L745,U585,R440,D731,R740,U584,L867,D906,R176,U72,L323,U329,L445,D667,R626,D111,L895,D170,R957,D488,R214,D354,L215,U486,L665,D266,L987";
 
         Map.Entry<Integer, Integer[]> entry = getNearest(getIntersections(getCoords(wire1.split(",")), getCoords(wire2.split(","))));
-
-
+        Map.Entry<Integer, Integer[]> entry2 = getShortest(getIntersections(getCoords(wire1.split(",")), getCoords(wire2.split(","))));
+        System.out.println(entry.getKey());
+        System.out.println(entry2.getKey());
         System.out.println("Finished!");
     }
 
@@ -33,12 +34,23 @@ public class App {
         return entry;
     }
 
+    public Map.Entry<Integer, Integer[]> getShortest(ArrayList<Integer[]> intersections) {
+        HashMap<Integer, Integer[]> distance = new HashMap<>();
+        for (Integer[] intersection:intersections) {
+            distance.put(intersection[2] + intersection[3], intersection);
+        }
+        Map<Integer, Integer[]> sortedmap = new TreeMap<Integer, Integer[]>(distance);
+        Map.Entry<Integer, Integer[]> entry = (Map.Entry<Integer, Integer[]>) sortedmap.entrySet().toArray()[0];
+
+        return entry;
+    }
+
     public ArrayList<Integer[]> getIntersections(ArrayList<Integer[]> wire1, ArrayList<Integer[]> wire2) {
         ArrayList<Integer[]> intersections = new ArrayList<>();
         for (Integer[] coordlist:wire1) {
             for (Integer[] coordlist2:wire2) {
                 if (coordlist2[0].equals(coordlist[0])&&coordlist[1].equals(coordlist2[1])) {
-                    intersections.add(new Integer[]{coordlist[0], coordlist[1]});
+                    intersections.add(new Integer[]{coordlist[0], coordlist[1], coordlist[2], coordlist2[2]});
                 }
             }
         }
@@ -49,28 +61,34 @@ public class App {
         ArrayList<Integer[]> coords = new ArrayList<Integer[]>();
         int posx = 0;
         int posy = 0;
+        int steps = 1;
         for (String move : wiremoves) {
             if (move.startsWith("L")) {
                 for (int i = 0; i<Integer.parseInt(move.replace("L", "")); i++) {
                     posx--;
-                    coords.add(new Integer[]{posx, posy});
+                    coords.add(new Integer[]{posx, posy, steps});
+                    steps++;
                 }
             } else if (move.startsWith("R")) {
                 for (int i = 0; i<Integer.parseInt(move.replace("R", "")); i++) {
                     posx++;
-                    coords.add(new Integer[]{posx, posy});
+                    coords.add(new Integer[]{posx, posy, steps});
+                    steps++;
                 }
             } else if (move.startsWith("U")) {
                 for (int i = 0; i<Integer.parseInt(move.replace("U", "")); i++) {
                     posy++;
-                    coords.add(new Integer[]{posx, posy});
+                    coords.add(new Integer[]{posx, posy, steps});
+                    steps++;
                 }
             } else if (move.startsWith("D")) {
                 for (int i = 0; i<Integer.parseInt(move.replace("D", "")); i++) {
                     posy--;
-                    coords.add(new Integer[]{posx, posy});
+                    coords.add(new Integer[]{posx, posy, steps});
+                    steps++;
                 }
             }
+
         }
         return coords;
     }
