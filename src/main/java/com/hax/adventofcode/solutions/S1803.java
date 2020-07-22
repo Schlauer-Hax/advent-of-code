@@ -51,9 +51,7 @@ public class S1803 implements Solution {
                             }
                         }
                     }
-                    if (ocount == 0) {
-                        claim.setOverlapping(false);
-                    } else claim.setOverlapping(true);
+                    claim.setOverlapping(ocount != 0);
                 }
         );
         // Part 1
@@ -74,11 +72,11 @@ public class S1803 implements Solution {
 
     public class Claim {
 
-        private int id;
-        private int leftedge;
-        private int topedge;
-        private int wide;
-        private int tall;
+        private final int id;
+        private final int leftedge;
+        private final int topedge;
+        private final int wide;
+        private final int tall;
         private boolean overlapping;
 
         public Claim(String id, String leftedge, String topedge, String wide, String tall) {

@@ -120,8 +120,8 @@ public class S1804 implements Solution {
 
     public class Sleep {
 
-        private int timeasleep;
-        private int wakeup;
+        private final int timeasleep;
+        private final int wakeup;
         private String sleepString;
 
         public Sleep(int timeasleep, int wakeup) {
