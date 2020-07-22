@@ -24,8 +24,8 @@ public class S1805 implements Solution {
             }
         }
         int shortest = content.length();
-        for (Integer length:testedChars.values()) {
-            if (length<shortest) shortest = length;
+        for (Integer length : testedChars.values()) {
+            if (length < shortest) shortest = length;
         }
 
         System.out.println(shortest);
@@ -38,8 +38,8 @@ public class S1805 implements Solution {
     public List<String> react(List<String> letter) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < letter.size(); i++) {
-            if (list.size()>0&&check_two_chars(letter.get(i), list.get(list.size()-1))) {
-                list.remove(list.size()-1);
+            if (list.size() > 0 && check_two_chars(letter.get(i), list.get(list.size() - 1))) {
+                list.remove(list.size() - 1);
             } else {
                 list.add(letter.get(i));
             }

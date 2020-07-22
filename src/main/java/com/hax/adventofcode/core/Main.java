@@ -5,7 +5,6 @@ import org.reflections.scanners.SubTypesScanner;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Files;
 import java.util.Scanner;
 import java.util.Set;
@@ -30,7 +29,7 @@ public class Main {
                 e.printStackTrace();
             }
         }
-        if (id==null) {
+        if (id == null) {
             System.out.println("Please select the Solution you want to run");
             System.out.println("IDs are build like this: S<year><count>");
             System.out.println("An example for this would be: S1901");

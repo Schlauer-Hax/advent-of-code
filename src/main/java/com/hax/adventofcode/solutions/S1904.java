@@ -41,7 +41,7 @@ public class S1904 implements Solution {
                                 list.add(i);
                         }
                     }
-                    if (entry.getValue()>1) {
+                    if (entry.getValue() > 1) {
                         if (!partonelist.contains(i))
                             partonelist.add(i);
                     }

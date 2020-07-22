@@ -26,10 +26,11 @@ public class S1801 implements Solution {
             }
             reachedNumbers.add(i);
         }
-        if (run==0) {
+        if (run == 0) {
             System.out.println(i);
         }
-        if (!numberreachedtwice) return calc(content, i, reachedNumbers, twicereachednumber, numberreachedtwice, run+1);
+        if (!numberreachedtwice)
+            return calc(content, i, reachedNumbers, twicereachednumber, numberreachedtwice, run + 1);
         else return twicereachednumber;
     }
 }

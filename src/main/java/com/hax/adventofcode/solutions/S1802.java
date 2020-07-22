@@ -3,13 +3,12 @@ package com.hax.adventofcode.solutions;
 import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class S1802 implements Solution {
 
     @Override
-    public void run()  {
+    public void run() {
         String content = Utils.getFileContent(this);
         HashMap<String, HashMap<String, Integer>> wordMap = new HashMap<>();
         for (String check : content.split("\n")) {
@@ -28,7 +27,7 @@ public class S1802 implements Solution {
             if (map.containsValue(1)) two[0]++;
             if (map.containsValue(2)) three[0]++;
         });
-        System.out.println(two[0]*three[0]);
+        System.out.println(two[0] * three[0]);
 
         for (String word : content.split("\n")) {
             for (String word2 : content.split("\n")) {
@@ -38,7 +37,7 @@ public class S1802 implements Solution {
                         common++;
                     }
                 }
-                if (word.length()-common == 1) {
+                if (word.length() - common == 1) {
                     for (int i = 0; word.length() > i; i++) {
                         if (String.valueOf(word.charAt(i)).equals(String.valueOf(word2.charAt(i)))) {
                             System.out.print(word.charAt(i));
@@ -56,7 +55,7 @@ public class S1802 implements Solution {
         } else {
             int i1 = map.get(string);
             map.remove(string);
-            map.put(string, i1+1);
+            map.put(string, i1 + 1);
         }
     }
 }

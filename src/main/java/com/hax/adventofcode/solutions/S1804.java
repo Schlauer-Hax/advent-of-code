@@ -30,16 +30,16 @@ public class S1804 implements Solution {
             } else if (string.endsWith("wakes up")) {
                 int fallminute = Integer.parseInt(lastString.split(" ")[1].replace("]", "").split(":")[1]);
                 int wakeminute = Integer.parseInt(string.split(" ")[1].replace("]", "").split(":")[1]);
-                int sum = wakeminute-fallminute;
-                guard.setAsleep(guard.getAsleep()+sum);
+                int sum = wakeminute - fallminute;
+                guard.setAsleep(guard.getAsleep() + sum);
                 guard.getSleeplist().add(new Sleep(fallminute, wakeminute));
             }
         }
 
         Guard most = null;
-        for (Map.Entry<Integer, Guard> entry: map.entrySet()) {
+        for (Map.Entry<Integer, Guard> entry : map.entrySet()) {
             Guard guard1 = entry.getValue();
-            if (most==null) most = guard1;
+            if (most == null) most = guard1;
             if (guard1.getAsleep() > most.getAsleep()) most = guard1;
         }
 
@@ -47,17 +47,17 @@ public class S1804 implements Solution {
         int mostsleepminute = 0;
         for (int i = 0; i < 60; i++) {
             int sleepminute = 0;
-            for (Sleep sleep:most.getSleeplist()) {
-                if (String.valueOf(sleep.getSleepString().charAt(i)).equals("#"))  {
+            for (Sleep sleep : most.getSleeplist()) {
+                if (String.valueOf(sleep.getSleepString().charAt(i)).equals("#")) {
                     sleepminute++;
                 }
             }
-            if (sleepminute>mostsleep) {
+            if (sleepminute > mostsleep) {
                 mostsleep = sleepminute;
                 mostsleepminute = i;
             }
         }
-        System.out.println(most.getId()*mostsleepminute);
+        System.out.println(most.getId() * mostsleepminute);
 
         // Part 2
         Guard mostguard = null;
@@ -71,14 +71,14 @@ public class S1804 implements Solution {
                         testminute++;
                     }
                 }
-                if (testminute>mostminute) {
+                if (testminute > mostminute) {
                     mostminute = testminute;
                     minute = i;
                     mostguard = guard1;
                 }
             }
         }
-        System.out.println(mostguard.getId()*minute);
+        System.out.println(mostguard.getId() * minute);
     }
 
     public class Guard {
@@ -127,11 +127,11 @@ public class S1804 implements Solution {
         public Sleep(int timeasleep, int wakeup) {
             this.timeasleep = timeasleep;
             this.wakeup = wakeup;
-            sleepString="";
+            sleepString = "";
             for (int i = 0; i < 60; i++) {
-                if (i<timeasleep) sleepString+=".";
-                else if (i>=timeasleep&&i<wakeup) sleepString+="#";
-                else if (i>=wakeup) sleepString+=".";
+                if (i < timeasleep) sleepString += ".";
+                else if (i >= timeasleep && i < wakeup) sleepString += "#";
+                else if (i >= wakeup) sleepString += ".";
             }
         }
 

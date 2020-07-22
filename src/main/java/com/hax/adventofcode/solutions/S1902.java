@@ -28,18 +28,18 @@ public class S1902 implements Solution {
             commands[1] = String.valueOf(i1);
             commands[2] = String.valueOf(i2);
             String[] bruhmoment = runcommands(commands);
-            if (bruhmoment[0].equals(number+"")) {
+            if (bruhmoment[0].equals(number + "")) {
                 System.out.println("You did it. You crazy son of a bitch, you did it.");
-                System.out.println(i1*100+i2);
+                System.out.println(i1 * 100 + i2);
                 return;
             } else {
-                if (i2==99) {
-                    if (i1==99) {
+                if (i2 == 99) {
+                    if (i1 == 99) {
                         System.out.println("Wait what");
                         return;
                     } else {
                         i1++;
-                        i2=0;
+                        i2 = 0;
                     }
                 } else i2++;
             }
@@ -48,21 +48,21 @@ public class S1902 implements Solution {
 
 
     public String[] runcommands(String[] commands) {
-        for (int i =0; i<commands.length; i= i+4) {
+        for (int i = 0; i < commands.length; i = i + 4) {
             String command = commands[i];
             if (command.equals("99")) {
                 break;
             }
-            String firstnumber=commands[Integer.parseInt(commands[i+1])];
-            String secondnumber=commands[Integer.parseInt(commands[i+2])];
-            String savenumber = commands[i+3];
+            String firstnumber = commands[Integer.parseInt(commands[i + 1])];
+            String secondnumber = commands[Integer.parseInt(commands[i + 2])];
+            String savenumber = commands[i + 3];
 
             if (command.equals("1")) {
-                int sum = Integer.parseInt(firstnumber)+Integer.parseInt(secondnumber);
+                int sum = Integer.parseInt(firstnumber) + Integer.parseInt(secondnumber);
                 commands[Integer.parseInt(savenumber)] = String.valueOf(sum);
 
             } else if (command.equals("2")) {
-                int sum = Integer.parseInt(firstnumber)*Integer.parseInt(secondnumber);
+                int sum = Integer.parseInt(firstnumber) * Integer.parseInt(secondnumber);
                 commands[Integer.parseInt(savenumber)] = String.valueOf(sum);
             }
 

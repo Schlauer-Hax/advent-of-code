@@ -3,11 +3,6 @@ package com.hax.adventofcode.solutions;
 import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
 public class S1901 implements Solution {
 
     @Override
