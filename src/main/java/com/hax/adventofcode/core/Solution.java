@@ -6,6 +6,6 @@ public interface Solution {
     // 0 = Success
     // 1 = Error
 
-    public int run();
+    public void run();
 
 }
