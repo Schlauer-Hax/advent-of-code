@@ -24,7 +24,7 @@ public class Main {
         File debugFile = new File("DEBUG.txt");
         if (debugFile.exists()) {
             try {
-                id = new String(Files.readAllBytes(debugFile.toPath()));
+                id = new String(Files.readAllBytes(debugFile.toPath())).replace("\r\n", "");
             } catch (IOException e) {
                 e.printStackTrace();
             }

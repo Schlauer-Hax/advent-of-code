@@ -8,66 +8,58 @@ public class S1902 implements Solution {
 
     @Override
     public void run() {
+        String code = Utils.getFileContent(this);
+        String[] instructions = code.split(",");
+        System.out.println(this.runCode(StringArrToIntArr(instructions))[0]);
 
-        String input = Utils.getFileContent(this);
-        String[] commands = input.split(",");
-
-        commands[1] = "12";
-        commands[2] = "2";
-
-        String[] result = runcommands(commands);
-
-        System.out.println(String.join(",", result));
-        System.out.println(result[0]);
-
-        Integer number = 19690720;
-        int i2 = 0;
-        int i1 = 0;
-        while (true) {
-            commands = input.split(",");
-            commands[1] = String.valueOf(i1);
-            commands[2] = String.valueOf(i2);
-            String[] bruhmoment = runcommands(commands);
-            if (bruhmoment[0].equals(number + "")) {
-                System.out.println("You did it. You crazy son of a bitch, you did it.");
-                System.out.println(i1 * 100 + i2);
-                return;
-            } else {
-                if (i2 == 99) {
-                    if (i1 == 99) {
-                        System.out.println("Wait what");
-                        return;
-                    } else {
-                        i1++;
-                        i2 = 0;
-                    }
-                } else i2++;
+        for (int i1 = 0; i1<=99; i1++) {
+            for (int i2 = 0; i2<=99; i2++) {
+                Integer[] editedinstructions = StringArrToIntArr(instructions.clone());
+                editedinstructions[1] = i1;
+                editedinstructions[2] = i2;
+                Integer[] result = this.runCode(editedinstructions);
+                if (result[0]==19690720) {
+                    System.out.println(100*i1+i2);
+                    System.exit(0);
+                }
             }
         }
     }
 
+    public Integer[] runCode(Integer[] instructions) {
+        forloop:
+        for (int i = 0; i < instructions.length; i++) {
+            Integer instruction = instructions[i];
+            switch (instruction) {
 
-    public String[] runcommands(String[] commands) {
-        for (int i = 0; i < commands.length; i = i + 4) {
-            String command = commands[i];
-            if (command.equals("99")) {
-                break;
+                case 1:
+                    instructions[instructions[i+3]] = instructions[instructions[i+1]]+instructions[instructions[i+2]];
+                    i+=3;
+                    break;
+
+                case 2:
+                    instructions[instructions[i+3]] = instructions[instructions[i+1]]*instructions[instructions[i+2]];
+                    i+=3;
+                    break;
+
+                case 99:
+                    break forloop;
+
+                default:
+                    System.err.println("Something went wrong");
+                    System.exit(1);
+                    break;
             }
-            String firstnumber = commands[Integer.parseInt(commands[i + 1])];
-            String secondnumber = commands[Integer.parseInt(commands[i + 2])];
-            String savenumber = commands[i + 3];
-
-            if (command.equals("1")) {
-                int sum = Integer.parseInt(firstnumber) + Integer.parseInt(secondnumber);
-                commands[Integer.parseInt(savenumber)] = String.valueOf(sum);
-
-            } else if (command.equals("2")) {
-                int sum = Integer.parseInt(firstnumber) * Integer.parseInt(secondnumber);
-                commands[Integer.parseInt(savenumber)] = String.valueOf(sum);
-            }
-
         }
-
-        return commands;
+        return instructions;
     }
+
+    public static Integer[] StringArrToIntArr(String[] s) {
+        Integer[] result = new Integer[s.length];
+        for (int i = 0; i < s.length; i++) {
+            result[i] = Integer.parseInt(s[i].replace("\r\n", ""));
+        }
+        return result;
+    }
+
 }
