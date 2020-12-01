@@ -1,4 +1,4 @@
-package com.hax.adventofcode.solutions;
+package com.hax.adventofcode.solutions.S19;
 
 import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
@@ -18,7 +18,7 @@ public class S1906 implements Solution {
             String orbit2name = split[1].replace("\r", "");
             Orbit orbit1 = getOrbit(orbit1name, orbits);
 
-            if (orbit1==null) {
+            if (orbit1 == null) {
                 Orbit neworbit = new Orbit(orbit1name);
                 orbit1 = neworbit;
                 orbits.add(neworbit);
@@ -26,7 +26,7 @@ public class S1906 implements Solution {
 
             Orbit orbit2 = getOrbit(orbit2name, orbits);
 
-            if (orbit2==null) {
+            if (orbit2 == null) {
                 Orbit neworbit = new Orbit(orbit2name);
                 orbit2 = neworbit;
                 orbits.add(neworbit);
@@ -36,14 +36,14 @@ public class S1906 implements Solution {
         }
 
         for (Orbit orbit : orbits) {
-            if (orbit.getDirectobit()!=null)
+            if (orbit.getDirectobit() != null)
                 addDirectOrbitstoIndirect(orbit, orbit.getDirectobit());
         }
 
         int count = 0;
         for (Orbit orbit : orbits) {
-            if (orbit.getDirectobit()!=null) count++;
-            count+=orbit.getIndirectobits().size();
+            if (orbit.getDirectobit() != null) count++;
+            count += orbit.getIndirectobits().size();
         }
 
         System.out.println(count);
@@ -65,7 +65,7 @@ public class S1906 implements Solution {
                 search(behindorbit, orbits, scannedorbits);
         }
 
-        if (orbit.getDirectobit()!=null)
+        if (orbit.getDirectobit() != null)
             search(orbit.getDirectobit(), orbits, scannedorbits);
     }
 
@@ -73,7 +73,7 @@ public class S1906 implements Solution {
         ArrayList<String> names = new ArrayList<>();
         for (Orbit orbit : scannedorbits) {
             if (names.contains(orbit.getName())) {
-                for (int i = names.size()-1; i>=0; i--) {
+                for (int i = names.size() - 1; i >= 0; i--) {
                     if (!names.get(i).equals(orbit.getName())) {
                         names.remove(i);
                     } else break;
@@ -81,13 +81,13 @@ public class S1906 implements Solution {
             } else
                 names.add(orbit.getName());
         }
-        System.out.println(names.size()-2);
+        System.out.println(names.size() - 2);
     }
 
     public List<Orbit> getBehindOrbits(Orbit orbit, List<Orbit> orbits) {
         List<Orbit> behindorbits = new ArrayList<>();
         for (Orbit scanorbit : orbits) {
-            if (scanorbit.getDirectobit()!=null) {
+            if (scanorbit.getDirectobit() != null) {
                 if (scanorbit.getDirectobit().equals(orbit)) {
                     behindorbits.add(scanorbit);
                 }
@@ -97,7 +97,7 @@ public class S1906 implements Solution {
     }
 
     public Orbit addDirectOrbitstoIndirect(Orbit addorbit, Orbit orbit) {
-        if (orbit.getDirectobit()==null) return addorbit;
+        if (orbit.getDirectobit() == null) return addorbit;
         addorbit.addIndirectobit(orbit.getDirectobit());
         return addDirectOrbitstoIndirect(addorbit, orbit.getDirectobit());
     }

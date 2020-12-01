@@ -1,4 +1,4 @@
-package com.hax.adventofcode.solutions;
+package com.hax.adventofcode.solutions.S19;
 
 import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
@@ -6,50 +6,29 @@ import com.hax.adventofcode.core.Utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class S1907 implements Solution {
+public class S1905 implements Solution {
+
+
+    public static Integer[] StringArrToIntArr(String[] s) {
+        Integer[] result = new Integer[s.length];
+        for (int i = 0; i < s.length; i++) {
+            result[i] = Integer.parseInt(s[i].replace("\r\n", ""));
+        }
+        return result;
+    }
+
     @Override
     public void run() {
         String content = Utils.getFileContent(this);
         String[] split = content.split("\r\n");
         String code = split[0];
 
-        int biggestpower = 0;
-        String modes = "";
-        for (int mode1 = 0; mode1 < 5; mode1++) {
-            for (int mode2 = 0; mode2 < 5; mode2++) {
-                if (mode1 != mode2)
-                    for (int mode3 = 0; mode3 < 5; mode3++) {
-                        if (mode3 != mode2 && mode3 != mode1)
-                            for (int mode4 = 0; mode4 < 5; mode4++) {
-                                if (mode4 != mode3 && mode4 != mode2 && mode4 != mode1)
-                                    for (int mode5 = 0; mode5 < 5; mode5++) {
-                                        if (mode1!= mode5 && mode2 != mode5 && mode3 != mode5 && mode4 != mode5) {
-                                            int result1 = this.runCode(StringArrToIntArr(code.split(",")), mode1, 0);
-                                            int result2 = this.runCode(StringArrToIntArr(code.split(",")), mode2, result1);
-                                            int result3 = this.runCode(StringArrToIntArr(code.split(",")), mode3, result2);
-                                            int result4 = this.runCode(StringArrToIntArr(code.split(",")), mode4, result3);
-                                            int result5 = this.runCode(StringArrToIntArr(code.split(",")), mode5, result4);
-
-                                            if (biggestpower < result5) {
-                                                biggestpower = result5;
-                                                modes = String.format("%d %d %d %d %d", mode1, mode2, mode3, mode4, mode5);
-                                            }
-                                        }
-                                    }
-                            }
-                    }
-            }
-        }
-        System.out.println(biggestpower);
-        System.out.println(modes);
-        // TODO: Part 2
+        this.runCode(StringArrToIntArr(code.split(",")), 1);
+        this.runCode(StringArrToIntArr(code.split(",")), 5);
     }
 
-
-    // Int code Computer
-    public int runCode(Integer[] originstructions, Integer input, Integer input2) {
+    public Integer[] runCode(Integer[] originstructions, Integer input) {
         ArrayList<Integer> instructions = new ArrayList<>(Arrays.asList(originstructions.clone()));
-        int inputcount = 0;
         forloop:
         for (int i = 0; i < instructions.size(); i++) {
             Integer instruction = instructions.get(i);
@@ -77,15 +56,14 @@ public class S1907 implements Solution {
                     break;
 
                 case 3:
-                    if (inputcount == 0) {
-                        instructions.set(instructions.get(i + 1), input);
-                        inputcount++;
-                    } else instructions.set(instructions.get(i + 1), input2);
+                    instructions.set(instructions.get(i + 1), input);
                     i += 1;
                     break;
 
                 case 4:
-                    return getRightInt(instruction, instructions, 0, i);
+                    System.out.println(getRightInt(instruction, instructions, 0, i));
+                    i += 1;
+                    break;
 
                 case 5:
                     if (getRightInt(instruction, instructions, 0, i) != 0) {
@@ -128,15 +106,7 @@ public class S1907 implements Solution {
                     break;
             }
         }
-        return 0;
-    }
-
-    public static Integer[] StringArrToIntArr(String[] s) {
-        Integer[] result = new Integer[s.length];
-        for (int i = 0; i < s.length; i++) {
-            result[i] = Integer.parseInt(s[i].replace("\r\n", ""));
-        }
-        return result;
+        return instructions.toArray(Integer[]::new);
     }
 
     public Integer getMode(Integer instruction, Integer arg) {

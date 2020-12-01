@@ -1,4 +1,4 @@
-package com.hax.adventofcode.solutions;
+package com.hax.adventofcode.solutions.S20;
 
 import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
@@ -31,7 +31,7 @@ public class S2001 implements Solution {
             for (String second : arr) {
                 for (String third : arr) {
                     if (Integer.parseInt(first) + Integer.parseInt(second) + Integer.parseInt(third) == 2020) {
-                        System.out.println("Numbers: " + first + " + " + second+ " + "+ third);
+                        System.out.println("Numbers: " + first + " + " + second + " + " + third);
                         System.out.println("Answer: " + Integer.parseInt(first) * Integer.parseInt(second) * Integer.parseInt(third));
                         return;
                     }

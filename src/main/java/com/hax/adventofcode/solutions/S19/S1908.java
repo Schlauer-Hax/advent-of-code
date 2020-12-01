@@ -1,4 +1,4 @@
-package com.hax.adventofcode.solutions;
+package com.hax.adventofcode.solutions.S19;
 
 import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
@@ -51,15 +51,15 @@ public class S1908 implements Solution {
 
 
         StringBuilder image = new StringBuilder();
-        for (int i = 0; i<fewstlayer.length(); i++) {
+        for (int i = 0; i < fewstlayer.length(); i++) {
             image.append(getImageInt(i, 0, layers));
         }
         System.out.println(image.toString());
 
         BufferedImage drawimage = new BufferedImage(wide, tall, Image.SCALE_DEFAULT);
-        for (int i = 0; i<tall; i++) {
-            for (int j = 0; j<wide; j++) {
-                switch (Integer.parseInt(String.valueOf(image.toString().charAt(i*wide+j)))) {
+        for (int i = 0; i < tall; i++) {
+            for (int j = 0; j < wide; j++) {
+                switch (Integer.parseInt(String.valueOf(image.toString().charAt(i * wide + j)))) {
                     case 1:
                         drawimage.setRGB(j, i, Color.WHITE.getRGB());
                         break;
@@ -80,7 +80,7 @@ public class S1908 implements Solution {
 
 
     public String getImageInt(int i, int layer, ArrayList<String> layers) {
-        if (layer<layers.size()) {
+        if (layer < layers.size()) {
             String number = String.valueOf(layers.get(layer).charAt(i));
             switch (number) {
                 case "0":

@@ -1,4 +1,4 @@
-package com.hax.adventofcode.solutions;
+package com.hax.adventofcode.solutions.S19;
 
 import com.hax.adventofcode.core.Solution;
 
