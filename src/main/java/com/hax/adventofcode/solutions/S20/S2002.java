@@ -4,18 +4,11 @@ import com.hax.adventofcode.core.Solution;
 import com.hax.adventofcode.core.Utils;
 
 public class S2002 implements Solution {
+
     @Override
-    public void run() {
-        String str = Utils.getFileContent(this);
-        String[] arr = str.split("\n");
-        firstpart(arr);
-        secondpart(arr);
-
-    }
-
-    public void firstpart(String[] arr) {
+    public void firstPart(String data, String[] lines) {
         int valid = 0;
-        for (String line : arr) {
+        for (String line : lines) {
             String[] split = line.split(" ");
             String letter = split[1].replace(":", "");
             String[] minmax = split[0].split("-");
@@ -32,9 +25,10 @@ public class S2002 implements Solution {
         System.out.println(valid);
     }
 
-    public void secondpart(String[] arr) {
+    @Override
+    public void secondPart(String data, String[] lines) {
         int valid = 0;
-        for (String line : arr) {
+        for (String line : lines) {
             String[] split = line.split(" ");
             String letter = split[1].replace(":", "");
             String[] positions = split[0].split("-");

@@ -41,7 +41,12 @@ public class Main {
         for (Class<? extends Solution> clazz : classes) {
             if (clazz.getSimpleName().equals(id)) {
                 try {
-                    clazz.getDeclaredConstructor().newInstance().run();
+                    Solution solution = clazz.getDeclaredConstructor().newInstance();
+                    solution.run();
+                    String data = Utils.getFileContent(solution);
+                    String[] lines = data.split("\n");
+                    solution.firstPart(data, lines);
+                    solution.secondPart(data, lines);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

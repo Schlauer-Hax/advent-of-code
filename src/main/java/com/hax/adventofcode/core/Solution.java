@@ -2,10 +2,8 @@ package com.hax.adventofcode.core;
 
 public interface Solution {
 
-    // Return codes:
-    // 0 = Success
-    // 1 = Error
-
-    public void run();
+    default void run() {}
+    default void firstPart(String data, String[] lines) {}
+    default void secondPart(String data, String[] lines) {}
 
 }
