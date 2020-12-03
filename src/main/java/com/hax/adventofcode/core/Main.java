@@ -45,7 +45,9 @@ public class Main {
                     solution.run();
                     String data = Utils.getFileContent(solution);
                     String[] lines = data.split("\n");
+                    System.out.println();
                     solution.firstPart(data, lines);
+                    System.out.println();
                     solution.secondPart(data, lines);
                 } catch (Exception e) {
                     e.printStackTrace();

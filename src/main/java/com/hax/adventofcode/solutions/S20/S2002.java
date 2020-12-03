@@ -1,7 +1,6 @@
 package com.hax.adventofcode.solutions.S20;
 
 import com.hax.adventofcode.core.Solution;
-import com.hax.adventofcode.core.Utils;
 
 public class S2002 implements Solution {
 
