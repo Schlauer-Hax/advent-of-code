@@ -44,6 +44,7 @@ public class Main {
                     Solution solution = clazz.getDeclaredConstructor().newInstance();
                     solution.run();
                     String data = Utils.getFileContent(solution);
+                    data = data.replaceAll("\r", "");
                     String[] lines = data.split("\n");
                     System.out.println();
                     solution.firstPart(data, lines);
