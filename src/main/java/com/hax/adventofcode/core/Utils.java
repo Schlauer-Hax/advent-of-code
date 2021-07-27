@@ -10,7 +10,7 @@ public class Utils {
         File file = new File("./data/" + solution.getClass().getSimpleName() + ".txt");
         if (!file.exists()) {
             System.err.println("File " + file.getName() + " not found!");
-            System.exit(1);
+            return "";
         }
         try {
             System.out.println("Reading from " + file.getName());

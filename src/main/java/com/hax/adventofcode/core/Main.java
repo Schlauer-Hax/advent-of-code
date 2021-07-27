@@ -50,6 +50,8 @@ public class Main {
                     solution.firstPart(data, lines);
                     System.out.println();
                     solution.secondPart(data, lines);
+                    System.out.println();
+                    solution.end();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
