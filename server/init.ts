@@ -14,38 +14,37 @@ wss.on('connection', (ws) => {
 
 let clients: [string, WebSocket][] = [];
 
+let solutions: [string, string[]][] = [];
+
 let runs: [string, string][] = []
+
+let aocwebserver: WebSocket;
 
 function handleMessage(message: string, websocket: WebSocket) {
   const split = message.split(':');
-  if (split[0] !== 'aocclient') return
-  const clientname = split[1];
-  const messagedata = split[2];
+  if (split[0] === 'aocclient') {
+    const clientname = split[1];
+    const messagedata = split[2];
 
-  if (messagedata === 'connected') {
-    console.log(`${clientname} connected!`)
-    if (clients.filter(client => client[0] === clientname).length !== 0) {
-      clients = clients.filter(client => client[0] !== clientname);
+    if (messagedata === 'connected') {
+      console.log(`${clientname} connected!`)
+      if (clients.filter(client => client[0] === clientname).length !== 0) {
+        clients = clients.filter(client => client[0] !== clientname);
+      }
+      clients.push([clientname, websocket]);
+      websocket.send('aocserver:solutions');
     }
-    clients.push([clientname, websocket]);
-
-    /* fs.readdir('../data/', (err, files) => {
-      files.forEach(file => {
-        fs.readFile('../data/'+file, (err, data) => {
-          const runid = v4();
-          const name = file.replace('.txt', '');
-          runs.push([runid, name])
-          websocket.send(`aocserver:run:${runid}:${name}:${data}`);
-        })
-      });
-    }); */
-
-    fs.readFile('../data/S1908.txt', (err, data) => {
-      websocket.send('aocserver:run:1234:S1908:' + data);
-    })
-  }
-  if (messagedata === 'result') {
-    // ${runs.find(run => run[0] === split[3])![1]}
-    console.log(`${clientname} got result ${split[4]} with runid ${split[3]}, solution `)
+    if (messagedata === 'result') {
+      console.log(`${clientname} got result ${split[4]} with runid ${split[3]}, solution `)
+    }
+    if (messagedata === 'solutions') {
+      solutions = solutions.filter(solution => solution[0]!==clientname)
+      solutions.push([clientname, split[3].split(', ')]);
+      aocwebserver.send('aocserver:solutions:'+solutions.join(':'))
+    }
+  } else if (split[0] === 'aocwebserver') {
+    if (split[1] === 'connected') {
+      aocwebserver = websocket;
+    }
   }
 }

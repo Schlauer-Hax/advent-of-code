@@ -2,3 +2,4 @@ output.png
 target/
 node_modules/
 .idea/
+.project

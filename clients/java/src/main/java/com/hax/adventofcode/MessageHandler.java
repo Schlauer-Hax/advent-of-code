@@ -20,6 +20,9 @@ public class MessageHandler {
         if (command.equals("connected")) {
             client.send("aocclient:java:connected");
         }
+        if (command.equals("solutions")) {
+            client.send("aocclient:java:solutions:"+String.join(", ", solutionRunner.getSolutionClasses().stream().map(Class::getSimpleName).toArray(String[]::new)));
+        }
         if (command.equals("run")) {
             String runid = messagearray[2];
             String name = messagearray[3];
