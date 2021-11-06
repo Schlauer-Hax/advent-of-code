@@ -16,6 +16,8 @@ public class MessageHandler {
     public void handleMessage(String message) {
         String[] messagearray = message.split(":");
 
+        // TODO: Check if aocserver in front
+
         String command = messagearray[1];
         if (command.equals("connected")) {
             client.send("aocclient:java:connected");
@@ -26,6 +28,7 @@ public class MessageHandler {
         if (command.equals("run")) {
             String runid = messagearray[2];
             String name = messagearray[3];
+            // TODO: Better parsing, use rest of array also
             String data = messagearray[4];
             System.out.println("Running "+name);
             System.out.println(runid);
