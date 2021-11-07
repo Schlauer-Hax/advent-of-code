@@ -3,11 +3,12 @@ import expressWs from 'express-ws';
 const { app, getWss, applyTo } = expressWs(express());
 import WebSocket from 'ws';
 import { ApiServer } from './apiserver';
+import fs from 'fs';
 
 export class WebServer {
   port: number;
 
-  constructor (port: number) {
+  constructor(port: number) {
     this.port = port;
   }
 
@@ -36,6 +37,17 @@ export class WebServer {
             this.runs.push([id, ws]);
             const clientname = this.solutions.find(solutiondata => solutiondata[1].includes(solution))![0];
             apiserver.clients.find(client => client[0] === clientname)![1].send(`aocserver:run:${id}:${solution}:${input}`)
+          } else if (split[1] === 'data') {
+            const name = split[2];
+            fs.readdir('../data/', (err, files) => {
+              if (err) return;
+              const possiblefile = files.find(file => file === name + '.txt');
+              if (!possiblefile) return;
+              fs.readFile('../data/' + possiblefile, (err, data) => {
+                if (err) return;
+                ws.send('aocwebserver:data:' + data.toString());
+              })
+            })
           }
         }
       });

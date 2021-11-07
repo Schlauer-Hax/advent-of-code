@@ -26,7 +26,6 @@ class View extends Component {
         }
 
         ws.onmessage = (event) => {
-            console.log(event.data);
             const split = event.data.split(':');
             if (split[0] === 'aocwebserver') {
                 if (split[1] === 'solutions') {
@@ -41,6 +40,10 @@ class View extends Component {
                 } else if (split[1] === 'result') {
                     (document.getElementById('result') as HTMLParagraphElement).textContent = split.slice(2).join(':');
                     this.checkRunnable();
+                } else if (split[1] === 'data') {
+                    const data = split.splice(2).join(':');
+                    (document.getElementById('input') as HTMLTextAreaElement).value = data;
+                    this.checkRunnable()
                 }
             }
         }
@@ -82,8 +85,13 @@ class View extends Component {
 
     handleChange = (selectedOption: any) => {
         this.setState({ selectedOption });
+        this.requestData(selectedOption.value);
         this.checkRunnable(selectedOption);
     };
+
+    requestData = (name: string) => {
+        ws.send(`aocwebsite:data:${name}`);
+    }
 
     checkRunnable = (selectedOption?: any) => {
         this.setState({ runnable: (document.getElementById('input') as HTMLTextAreaElement).value !== '' && (selectedOption !== undefined ? true : this.state.selectedOption !== null) && (document.getElementById('result') as HTMLParagraphElement).textContent !== 'Waiting for solutions...' })

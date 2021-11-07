@@ -41,6 +41,7 @@ export class ApiServer {
                     if (messagedata === 'solutions') {
                         webserver.solutions = webserver.solutions.filter(solution => solution[0] !== clientname)
                         webserver.solutions.push([clientname, split[3].split(', ')]);
+                        webserver.clients.forEach(client => client.send('aocwebserver:solutions:' + webserver.solutions.join(':')));
                     }
                 }
             })
