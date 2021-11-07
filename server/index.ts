@@ -1,8 +1,11 @@
-import { startApi } from "./apiserver";
-import { startWebserver } from "./webserver";
+import { ApiServer } from "./apiserver";
+import { WebServer } from "./webserver";
 
 const webport = 9000;
 const apiport = 1337;
 
-startWebserver(webport, apiport);
-startApi(apiport);
+const webserver = new WebServer(webport);
+const apiserver = new ApiServer(apiport);
+
+webserver.startWebserver(apiserver);
+apiserver.startApi(webserver);
