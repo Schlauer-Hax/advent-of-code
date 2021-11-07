@@ -11,7 +11,7 @@ public class S1905 implements Solution {
     public static Integer[] StringArrToIntArr(String[] s) {
         Integer[] result = new Integer[s.length];
         for (int i = 0; i < s.length; i++) {
-            result[i] = Integer.parseInt(s[i].replace("\r\n", ""));
+            result[i] = Integer.parseInt(s[i].replace("\r\n", "").replace("\n", ""));
         }
         return result;
     }
@@ -24,7 +24,7 @@ public class S1905 implements Solution {
         return new Object[]{this.runCode(StringArrToIntArr(code.split(",")), 1), this.runCode(StringArrToIntArr(code.split(",")), 5)};
     }
 
-    public Integer[] runCode(Integer[] originstructions, Integer input) {
+    public Integer runCode(Integer[] originstructions, Integer input) {
         ArrayList<Integer> instructions = new ArrayList<>(Arrays.asList(originstructions.clone()));
         forloop:
         for (int i = 0; i < instructions.size(); i++) {
@@ -58,7 +58,6 @@ public class S1905 implements Solution {
                     break;
 
                 case 4:
-                    System.out.println(getRightInt(instruction, instructions, 0, i));
                     i += 1;
                     break;
 
@@ -103,7 +102,12 @@ public class S1905 implements Solution {
                     break;
             }
         }
-        return instructions.toArray(Integer[]::new);
+        for (int i = 0; i < instructions.size(); i++) {
+            if (instructions.get(i)==99) {
+                return instructions.get(i+1);
+            }
+        }
+        return 0;
     }
 
     public Integer getMode(Integer instruction, Integer arg) {

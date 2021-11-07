@@ -31,21 +31,18 @@ public class SolutionRunner {
                     {
                         Object[] result = solution.run(data);
                         if (result[0] != "") {
-                            System.out.println(1);
                             return new String[]{String.valueOf(result[0]), String.valueOf(result[1])};
                         }
                     }
                     {
                         Object[] result = solution.run(lines);
                         if (result[0]!="") {
-                            System.out.println(result[0]);
                             return new String[]{String.valueOf(result[0]), String.valueOf(result[1])};
                         }
                     }
                     {
                         String firstresult = String.valueOf(solution.firstPart(data, lines));
                         String secondresult = String.valueOf(solution.secondPart(data, lines));
-                        System.out.println(firstresult);
                         return new String[]{firstresult, secondresult};
                     }
                 } catch (Exception e) {

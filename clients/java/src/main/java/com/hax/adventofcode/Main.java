@@ -7,7 +7,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            new Client(new URI("ws://localhost:9000/api")).connect();
+            new Client(new URI("ws://localhost:1337/")).connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }

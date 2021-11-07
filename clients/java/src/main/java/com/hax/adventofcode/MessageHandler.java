@@ -28,12 +28,8 @@ public class MessageHandler {
         if (command.equals("run")) {
             String runid = messagearray[2];
             String name = messagearray[3];
-            // TODO: Better parsing, use rest of array also
-            String data = messagearray[4];
-            System.out.println("Running "+name);
-            System.out.println(runid);
-            System.out.println(name);
-            System.out.println(data);
+            String data = String.join(":",Arrays.copyOfRange(messagearray, 4, messagearray.length));
+            System.out.println("Running solution "+name+" with runid "+runid);
             CompletableFuture.supplyAsync(() ->
                     solutionRunner.runClass(name, data)).thenAccept((result) -> {
                 client.send("aocclient:java:result:"+runid+":"+ Arrays.toString(result));
