@@ -53,7 +53,6 @@ public class S1504 implements Solution {
                 MessageDigest md = MessageDigest.getInstance("MD5");
                 byte[] thedigest = md.digest(bytesOfMessage);
                 String hashtext = toHex(thedigest);
-                System.out.println(i + " - " + hashtext);
                 if (hashtext.startsWith("000000")) {
                     return i;
                 }

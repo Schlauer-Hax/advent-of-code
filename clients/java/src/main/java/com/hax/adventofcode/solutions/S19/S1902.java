@@ -2,6 +2,8 @@ package com.hax.adventofcode.solutions.S19;
 
 import com.hax.adventofcode.Solution;
 
+import java.util.Arrays;
+
 public class S1902 implements Solution {
 
 
@@ -16,6 +18,8 @@ public class S1902 implements Solution {
     @Override
     public Object[] run(String content) {
         String[] instructions = content.split(",");
+        instructions[1] = "12";
+        instructions[2] = "2";
         int firstpart = (this.runCode(StringArrToIntArr(instructions))[0]);
 
         for (int i1 = 0; i1 <= 99; i1++) {
@@ -33,11 +37,9 @@ public class S1902 implements Solution {
     }
 
     public Integer[] runCode(Integer[] instructions) {
-        forloop:
         for (int i = 0; i < instructions.length; i++) {
             Integer instruction = instructions[i];
             switch (instruction) {
-
                 case 1:
                     instructions[instructions[i + 3]] = instructions[instructions[i + 1]] + instructions[instructions[i + 2]];
                     i += 3;
@@ -49,11 +51,10 @@ public class S1902 implements Solution {
                     break;
 
                 case 99:
-                    break forloop;
+                    return instructions;
 
                 default:
                     System.err.println("Something went wrong");
-                    System.exit(1);
                     break;
             }
         }

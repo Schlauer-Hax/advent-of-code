@@ -44,21 +44,13 @@ public class S1903 implements Solution {
 
     public ArrayList<Integer[]> getIntersections(ArrayList<Integer[]> wire1, ArrayList<Integer[]> wire2) {
         ArrayList<Integer[]> intersections = new ArrayList<>();
-        long start = System.currentTimeMillis();
         for (Integer[] coordlist : wire1) {
             for (Integer[] coordlist2 : wire2) {
                 if (coordlist2[0].equals(coordlist[0]) && coordlist[1].equals(coordlist2[1])) {
                     intersections.add(new Integer[]{coordlist[0], coordlist[1], coordlist[2], coordlist2[2]});
                 }
             }
-            int run = wire1.indexOf(coordlist);
-            long runned = (System.currentTimeMillis() - start);
-            double timeperrun = runned / Double.parseDouble(String.valueOf(run + 1));
-            long remaining = Math.round(timeperrun * wire1.size() - runned);
-            System.out.print(run + 1 + "/" + wire1.size() + " (" + remaining / 1000 + "s remaining; " + timeperrun + "ms per run)\r");
         }
-        long end = System.currentTimeMillis();
-        System.out.println("Time for runs: " + (end - start) / 1000 + "s");
         return intersections;
     }
 

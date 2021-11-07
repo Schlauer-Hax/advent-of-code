@@ -9,7 +9,7 @@ public class S1907 implements Solution {
     public static Integer[] StringArrToIntArr(String[] s) {
         Integer[] result = new Integer[s.length];
         for (int i = 0; i < s.length; i++) {
-            result[i] = Integer.parseInt(s[i].replace("\r\n", ""));
+            result[i] = Integer.parseInt(s[i].replace("\r\n", "").replace("\n", ""));
         }
         return result;
     }

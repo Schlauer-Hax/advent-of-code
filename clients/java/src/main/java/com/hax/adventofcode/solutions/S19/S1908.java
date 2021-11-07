@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Base64;
@@ -73,7 +74,8 @@ public class S1908 implements Solution {
             e.printStackTrace();
         }
         try {
-            return new Object[]{ones * twos, new String(Base64.getEncoder().encode(Files.readAllBytes(new File("output.png").toPath())), "UTF-8")};
+            return new Object[]{ones * twos, "<img src=\"data:image/png;base64,"+
+                    new String(Base64.getEncoder().encode(Files.readAllBytes(new File("output.png").toPath())), StandardCharsets.UTF_8)+"\"/>"};
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -38,7 +38,7 @@ class View extends Component {
                     solutions.reverse();
                     this.setState({ loading: false, options: solutions.map((solution: string) => { return { value: solution, label: solution } }) });
                 } else if (split[1] === 'result') {
-                    (document.getElementById('result') as HTMLParagraphElement).textContent = split.slice(2).join(':');
+                    (document.getElementById('result') as HTMLParagraphElement).innerHTML = split.slice(2).join(':');
                     this.checkRunnable();
                 } else if (split[1] === 'data') {
                     const data = split.splice(2).join(':');
