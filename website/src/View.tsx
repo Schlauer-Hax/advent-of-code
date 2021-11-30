@@ -5,9 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './View.css';
 import Dropzone from 'react-dropzone'
 import GithubCorner from "react-github-corner";
-import config from "./config.json";
 
-const url = config.url;
+const url = (window.location.protocol === 'http:' ? 'ws://' : 'wss://') + window.location.hostname+":"+ (window.location.port==='3000' ? 9000 : window.location.port);
 let ws = new WebSocket(url);
 
 class View extends Component {
