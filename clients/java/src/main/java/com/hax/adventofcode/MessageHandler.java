@@ -15,8 +15,7 @@ public class MessageHandler {
 
     public void handleMessage(String message) {
         String[] messagearray = message.split(":");
-
-        // TODO: Check if aocserver in front
+        if (!messagearray[0].equals("aocserver")) return;
 
         String command = messagearray[1];
         if (command.equals("connected")) {
