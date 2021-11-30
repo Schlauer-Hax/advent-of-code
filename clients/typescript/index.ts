@@ -32,9 +32,7 @@ function startWebsocket() {
         setTimeout(startWebsocket, 1000);
     });
 
-    ws.on('error', (err) => {
-        setTimeout(startWebsocket, 1000);
-    });
+    ws.on('error', console.error);
 }
 
 startWebsocket();
