@@ -4,11 +4,13 @@ export class S2101 implements ISolution {
     name = "S2101";
 
     firstPart(input: string): string {
-        return `${input}`;
+        return String(input.split('\n').filter((line, index, lines) => Number(line)>Number(lines[index-1])).length)
     }
 
     secondPart(input: string): string {
-        return `${input}`;
+        return String(input.split('\n').filter((line, index, lines) => {
+            return (index+3 === lines.length) ? false : Number(lines[index+1]) + Number(lines[index+2]) + Number(lines[index+3]) > Number(line) + Number(lines[index+1]) + Number(lines[index+2])
+        }).length)
     }
 }
 
