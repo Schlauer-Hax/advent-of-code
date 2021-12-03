@@ -9,7 +9,7 @@ export class S2103 implements ISolution {
             (split.length / 2 > split.filter(val => val[i] === '1').length) ? output += '0' : output += '1'
         }
         return (parseInt(output, 2) *
-            parseInt(output.replace(/1/g, '2').replace(/0/g, '1').replace(/2/g, '0'), 2))
+            (parseInt(output, 2) ^ Math.pow(2, output.length)-1))
     }
     secondPart(input: string): number {
         const split = input.split('\n');
