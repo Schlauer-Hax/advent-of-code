@@ -1,10 +1,12 @@
 import ISolution from './solutions/ISolution';
 import S2101 from './solutions/S2101';
 import S2102 from './solutions/S2102';
+import S2103 from './solutions/S2103';
 
 const list: ISolution[] = [
     new S2101(),
-    new S2102()
+    new S2102(),
+    new S2103()
 ]
 
 export class Runner {
