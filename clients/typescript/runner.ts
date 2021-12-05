@@ -3,12 +3,14 @@ import S2101 from './solutions/S2101';
 import S2102 from './solutions/S2102';
 import S2103 from './solutions/S2103';
 import S2104 from './solutions/S2104';
+import S2105 from './solutions/S2105';
 
 const list: ISolution[] = [
     new S2101(),
     new S2102(),
     new S2103(),
-    new S2104()
+    new S2104(),
+    new S2105()
 ]
 
 export class Runner {
