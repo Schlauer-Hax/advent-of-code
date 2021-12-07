@@ -5,7 +5,6 @@ export class S2105 implements ISolution {
     firstPart(input: string): number {
         const lines = input.split('\n');
         const array: any[] = [];
-        let count = 0;
         lines.forEach(line => {
             const smollsplit = line.split(' -> ');
             const x1 = Number(smollsplit[0].split(',')[0])
@@ -44,7 +43,6 @@ export class S2105 implements ISolution {
     secondPart(input: string): number {
         const lines = input.split('\n');
         const array: any[] = [];
-        let count = 0;
         lines.forEach(line => {
             const smollsplit = line.split(' -> ');
             const x1 = Number(smollsplit[0].split(',')[0])

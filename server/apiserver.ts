@@ -35,8 +35,9 @@ export class ApiServer {
                     if (messagedata === 'result') {
                         const id = Number(split[3]);
                         const result = split.slice(4).join(':');
-                        console.log(`${clientname} got result ${result} with runid ${id}, solution `)
-                        webserver.runs.find(run => run[0] === id)![1].send(`aocwebserver:result:${result}`)
+                        console.log(`${clientname} got result ${result} with runid ${id}`)
+                        const run = webserver.runs.find(run => run[0] === id)!;
+                        run[1].send(`aocwebserver:result:${result} - ${new Date().getTime() - run[2]}ms`)
                     }
                     if (messagedata === 'solutions') {
                         webserver.solutions = webserver.solutions.filter(solution => solution[0] !== clientname)

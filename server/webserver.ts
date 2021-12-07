@@ -15,7 +15,7 @@ export class WebServer {
   solutions: [string, string[]][] = [];
   // TODO: Type
   clients: any[] = [];
-  runs: [number, any][] = [];
+  runs: [number, any, number][] = [];
 
   startWebserver(apiserver: ApiServer) {
     app.use(express.static('public'))
@@ -34,8 +34,9 @@ export class WebServer {
             const input = split.slice(3).join(':');
 
             const id = Math.round(Math.random() * 100000)
-            this.runs.push([id, ws]);
+            this.runs.push([id, ws, new Date().getTime()]);
             const clientname = this.solutions.find(solutiondata => solutiondata[1].includes(solution))![0];
+            console.log(`running ${solution} with runid ${id} on runner ${clientname}`)
             apiserver.clients.find(client => client[0] === clientname)![1].send(`aocserver:run:${id}:${solution}:${input}`)
           } else if (split[1] === 'data') {
             const name = split[2];
