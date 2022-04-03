@@ -6,6 +6,7 @@ import S2104 from './solutions/S2104';
 import S2105 from './solutions/S2105';
 import S2106 from './solutions/S2106';
 import S2107 from './solutions/S2107';
+import S2108 from './solutions/S2108';
 
 const list: ISolution[] = [
     new S2101(),
@@ -15,6 +16,7 @@ const list: ISolution[] = [
     new S2105(),
     new S2106(),
     new S2107(),
+    new S2108(),
 ]
 
 export class Runner {
