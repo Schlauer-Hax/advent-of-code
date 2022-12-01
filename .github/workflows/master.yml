@@ -25,4 +25,4 @@ jobs:
         with:
           context: ./server/
           push: true
-          tags: schlauer-hax/advent-of-code:server
+          tags: ghcr.io/schlauer-hax/advent-of-code:server
