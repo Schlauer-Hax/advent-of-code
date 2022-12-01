@@ -1,11 +1,8 @@
-import { ApiServer } from "./apiserver";
-import { WebServer } from "./webserver";
+import ApiServer from "./apiserver.ts";
+import WebServer from "./webserver.ts";
 
-const webport = 9000;
-const apiport = 1337;
+const apiserver = new ApiServer();
+const webserver = new WebServer();
 
-const webserver = new WebServer(webport);
-const apiserver = new ApiServer(apiport);
-
-webserver.startWebserver(apiserver);
-apiserver.startApi(webserver);
+apiserver.startServer(webserver);
+webserver.startServer(apiserver);

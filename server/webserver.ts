@@ -1,65 +1,65 @@
-import express from 'express';
-import expressWs from 'express-ws';
-const { app, getWss, applyTo } = expressWs(express());
-import WebSocket from 'ws';
-import { ApiServer } from './apiserver';
-import fs from 'fs';
+import { Application, Router } from "https://deno.land/x/oak@v11.1.0/mod.ts";
+import ApiServer from "./apiserver.ts";
 
-export class WebServer {
-  port: number;
 
-  constructor(port: number) {
-    this.port = port;
+export default class WebServer {
+  solutions: [string, string[]][] = [];
+  clients: WebSocket[] = [];
+  runs: [number, WebSocket, number][] = [];
+
+  startServer(apiserver: ApiServer) {
+    const app = new Application();
+    const router = new Router();
+
+    router.get("/wss", (ctx) => {
+      if (!ctx.isUpgradable) {
+        ctx.throw(501);
+      }
+      const ws = ctx.upgrade();
+      ws.onopen = () => {
+        this.clients.push(ws);
+        this.updateSolutions([ws]);
+      }
+
+      ws.onmessage = (e) => {
+        const json = JSON.parse(e.data.toString());
+        if (!json.type) return;
+        if (json.type === 'run') {
+          const solution = json.solution;
+          const input = json.input
+
+          if (!(input && solution)) return;
+          const id = Math.round(Math.random() * 100000)
+          this.runs.push([id, ws, new Date().getTime()]);
+          const clientname = this.solutions.find(solutiondata => solutiondata[1].includes(solution))![0];
+          console.log(`running ${solution} with runid ${id} on runner ${clientname}`)
+          apiserver.clients.find(client => client[0] === clientname)![1].send(`aocserver:run:${id}:${solution}:${input}`)
+        } else if (json.type === 'data') {
+          if (!json.name) return;
+          Deno.readTextFile(`../data/${json.name}.txt`).then(data => {
+            ws.send(JSON.stringify({ type: 'data', data: data }));
+          }, () => { });
+        }
+      }
+    });
+
+    app.use(router.routes());
+    app.use(router.allowedMethods());
+
+    app.use(async (ctx) => {
+      await ctx.send({
+        root: `${Deno.cwd()}/public`,
+        index: "index.html",
+      });
+    });
+
+    console.log("Webserver on http://localhost:9000/");
+    app.listen({ port: 9000 });
   }
 
-  solutions: [string, string[]][] = [];
-  // TODO: Type
-  clients: any[] = [];
-  runs: [number, any, number][] = [];
-
-  startWebserver(apiserver: ApiServer) {
-    app.use(express.static('public'))
-
-    // Website Requests
-    app.ws('/', (ws, req) => {
-      ws.on('message', (msg) => {
-        const split = msg.toString().split(':');
-
-        if (split[0] === 'aocwebsite') {
-          if (split[1] === 'connected') {
-            this.clients.push(ws);
-            ws.send('aocwebserver:solutions:' + this.solutions.join(':'));
-          } else if (split[1] === 'run') {
-            const solution = split[2];
-            const input = split.slice(3).join(':');
-
-            const id = Math.round(Math.random() * 100000)
-            this.runs.push([id, ws, new Date().getTime()]);
-            const clientname = this.solutions.find(solutiondata => solutiondata[1].includes(solution))![0];
-            console.log(`running ${solution} with runid ${id} on runner ${clientname}`)
-            apiserver.clients.find(client => client[0] === clientname)![1].send(`aocserver:run:${id}:${solution}:${input}`)
-          } else if (split[1] === 'data') {
-            const name = split[2];
-            fs.readdir('../data/', (err, files) => {
-              if (err) return;
-              const possiblefile = files.find(file => file === name + '.txt');
-              if (!possiblefile) return;
-              fs.readFile('../data/' + possiblefile, (err, data) => {
-                if (err) return;
-                ws.send('aocwebserver:data:' + data.toString());
-              })
-            })
-          }
-        }
-      });
-
-      ws.on('close', () => {
-        this.clients = this.clients.filter(client => client !== ws);
-      })
-    });
-
-    app.listen(this.port, () => {
-      console.log(`Webserver listening on http://localhost:${this.port}`)
-    });
+  updateSolutions(clients = this.clients) {
+    clients.forEach(client => {
+      client.send(JSON.stringify({ type: 'solutions', data: this.solutions.map(x => x[1]).reduce((a, b) => a.concat(b), []) }));
+    })
   }
 }

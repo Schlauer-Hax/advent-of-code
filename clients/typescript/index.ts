@@ -9,9 +9,7 @@ function startWebsocket() {
         const split = message.split(':');
         if (split[0] !== 'aocserver') return;
         const command = split[1];
-        if (command === 'connected') {
-            ws.send("aocclient:ts:connected");
-        } else if (command === 'solutions') {
+        if (command === 'solutions') {
             ws.send(`aocclient:ts:solutions:${runner.getSolutions().join(', ')}`);
         } else if (command === 'run') {
             const runid = split[2];
@@ -25,6 +23,7 @@ function startWebsocket() {
 
     ws.addEventListener('open', () => {
         console.log('connected');
+        ws.send("aocclient:ts:connected");
     })
 
     ws.addEventListener('close', () => {
