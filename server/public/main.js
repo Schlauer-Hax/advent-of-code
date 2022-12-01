@@ -1,4 +1,4 @@
-const ws = new WebSocket(document.location.origin.replace('https', 'ws').replace('http', 'ws')+'/wss');
+const ws = new WebSocket(document.location.origin.replace('https', 'wss').replace('http', 'ws')+'/wss');
 ws.onopen = () => {
     document.getElementById('status').innerHTML = 'Connected';
     document.getElementById('solutions').disabled = false;
