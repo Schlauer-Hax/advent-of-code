@@ -1,0 +1,26 @@
+services:
+  aoc-server:
+    container_name: aoc-server
+    build: ./server/
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./data:/app/data
+  aoc-ts:
+    container_name: aoc-ts
+    build: ./clients/typescript/
+    depends_on:
+      - aoc-server
+    links:
+      - aoc-server
+    environment:
+      - WEBSOCKETURL=ws://aoc-server:1337/
+  aoc-java:
+    container_name: aoc-java
+    build: ./clients/java/
+    depends_on:
+      - aoc-server
+    links:
+      - aoc-server
+    environment:
+      - WEBSOCKETURL=ws://aoc-server:1337/

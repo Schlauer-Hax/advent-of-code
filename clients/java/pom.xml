@@ -21,6 +21,15 @@
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                 </configuration>
+                <executions>
+                    <execution>
+                      <id>make-assembly</id>
+                      <phase>package</phase> 
+                      <goals>
+                          <goal>single</goal>
+                      </goals>
+                    </execution>
+                  </executions>
             </plugin>
         </plugins>
     </build>
@@ -35,6 +44,11 @@
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>dotenv-java</artifactId>
+            <version>2.3.1</version>
         </dependency>
     </dependencies>
 
