@@ -26,3 +26,17 @@ jobs:
           context: ./server/
           push: true
           tags: ghcr.io/schlauer-hax/advent-of-code:server
+
+      - name: Build and push aocts
+        uses: docker/build-push-action@v3
+        with:
+          context: ./clients/typescript/
+          push: true
+          tags: ghcr.io/schlauer-hax/advent-of-code:ts
+
+      - name: Build and push aocjava
+        uses: docker/build-push-action@v3
+        with:
+          context: ./clients/java/
+          push: true
+          tags: ghcr.io/schlauer-hax/advent-of-code:java
