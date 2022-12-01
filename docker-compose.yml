@@ -5,7 +5,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ./data:/app/data
+      - ./data:/data
   aoc-ts:
     container_name: aoc-ts
     build: ./clients/typescript/
