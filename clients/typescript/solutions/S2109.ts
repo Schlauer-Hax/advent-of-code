@@ -1,4 +1,4 @@
-import ISolution from "./ISolution";
+import ISolution from "./ISolution.ts";
 
 export default class S2109 implements ISolution {
     name = "S2109";
@@ -10,7 +10,7 @@ export default class S2109 implements ISolution {
             number < ((lines[linesindex + 1] || [])[index]!==undefined ? (lines[linesindex + 1] || [])[index] : 10)
         )).reduce((a, b) => [...a, ...b], []).map(number => number+1).reduce((a, b) => a + b, 0);
     }
-    secondPart(input: string): number {
+    secondPart(_input: string): number {
         return 0;
     }
     

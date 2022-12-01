@@ -1,4 +1,4 @@
-import ISolution from "./ISolution";
+import ISolution from "./ISolution.ts";
 
 export class S2104 implements ISolution {
     name = 'S2104';
@@ -14,7 +14,7 @@ export class S2104 implements ISolution {
                     }
                 }
                 for (let column = 0; column < 5; column++) {
-                    const results = [...Array(5).keys()].map((val) => split[2 + board * 6 + val].split(' ').filter((val2, index2) => val2 != '').find((val2, index2) => index2 === column)!).filter(val => numbers.includes(val))
+                    const results = [...Array(5).keys()].map((val) => split[2 + board * 6 + val].split(' ').filter((val2) => val2 != '').find((_val2, index2) => index2 === column)!).filter(val => numbers.includes(val))
                     if (results.length === 5) {
                         return [board, numberlength];
                     }
@@ -31,7 +31,7 @@ export class S2104 implements ISolution {
     secondPart(input: string): number {
         const split = input.split('\n');
         const allnumbers = split[0].split(',')
-        const wins: any[] = []
+        const wins: [number, number][] = []
         const checkWin = (numberlength: number): [number, number] => {
             if (numberlength == allnumbers.length) return wins[wins.length - 1]
             const numbers = allnumbers.slice(0, numberlength);
@@ -43,7 +43,7 @@ export class S2104 implements ISolution {
                     }
                 }
                 for (let column = 0; column < 5; column++) {
-                    const results = [...Array(5).keys()].map((val) => split[2 + board * 6 + val].split(' ').filter((val2, index2) => val2 != '').find((val2, index2) => index2 === column)!).filter(val => numbers.includes(val))
+                    const results = [...Array(5).keys()].map((val) => split[2 + board * 6 + val].split(' ').filter((val2) => val2 != '').find((_val2, index2) => index2 === column)!).filter(val => numbers.includes(val))
                     if (results.length === 5) {
                         if (wins.filter(val => val[0] === board).length === 0) {
                             wins.push([board, numberlength]);

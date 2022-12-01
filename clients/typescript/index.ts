@@ -1,12 +1,11 @@
-import WebSocket from 'ws';
-import Runner from './runner';
+import Runner from './runner.ts';
 
 const runner = new Runner();
 
 function startWebsocket() {
     const ws = new WebSocket('ws://localhost:1337/');
-    ws.on('message', (data) => {
-        const message = data.toString();
+    ws.addEventListener('message', (data) => {
+        const message = data.data;
         const split = message.split(':');
         if (split[0] !== 'aocserver') return;
         const command = split[1];
@@ -24,15 +23,15 @@ function startWebsocket() {
         }
     });
 
-    ws.on('open', () => {
+    ws.addEventListener('open', () => {
         console.log('connected');
     })
 
-    ws.on('close', () => {
+    ws.addEventListener('close', () => {
         setTimeout(startWebsocket, 1000);
     });
 
-    ws.on('error', console.error);
+    ws.addEventListener('error', console.error);
 }
 
 startWebsocket();

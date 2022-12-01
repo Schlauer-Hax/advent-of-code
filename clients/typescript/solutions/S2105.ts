@@ -1,10 +1,10 @@
-import ISolution from "./ISolution";
+import ISolution from "./ISolution.ts";
 
 export class S2105 implements ISolution {
     name = 'S2105';
     firstPart(input: string): number {
         const lines = input.split('\n');
-        const array: any[] = [];
+        const array: string[] = [];
         lines.forEach(line => {
             const smollsplit = line.split(' -> ');
             const x1 = Number(smollsplit[0].split(',')[0])
@@ -42,7 +42,7 @@ export class S2105 implements ISolution {
     }
     secondPart(input: string): number {
         const lines = input.split('\n');
-        const array: any[] = [];
+        const array: string[] = [];
         lines.forEach(line => {
             const smollsplit = line.split(' -> ');
             const x1 = Number(smollsplit[0].split(',')[0])

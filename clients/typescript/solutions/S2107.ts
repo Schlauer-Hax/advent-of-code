@@ -1,4 +1,4 @@
-import ISolution from "./ISolution";
+import ISolution from "./ISolution.ts";
 
 export default class S2107 implements ISolution {
     name = 'S2107';
