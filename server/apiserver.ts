@@ -46,7 +46,6 @@ export default class ApiServer {
                 this.clients = this.clients.filter(client => client[1] !== ws);
             }
 
-
             return response;
 
         }, { port: 1337 });

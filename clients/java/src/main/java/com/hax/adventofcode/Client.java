@@ -19,6 +19,7 @@ public class Client extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshakedata) {
         System.out.println("Connected");
+        this.send("aocclient:java:connected");
     }
 
     @Override

@@ -41,6 +41,10 @@ export default class WebServer {
           }, () => { });
         }
       }
+
+      ws.onclose = () => {
+        this.clients = this.clients.filter(client => client !== ws);
+      }
     });
 
     app.use(router.routes());
