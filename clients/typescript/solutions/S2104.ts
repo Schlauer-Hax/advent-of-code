@@ -1,7 +1,6 @@
 import ISolution from "./ISolution.ts";
 
-export class S2104 implements ISolution {
-    name = 'S2104';
+export default class S2104 implements ISolution {
     firstPart(input: string): number {
         const split = input.split('\n');
         const allnumbers = split[0].split(',')
@@ -59,7 +58,4 @@ export class S2104 implements ISolution {
         const sum = [...Array(5).keys()].map((index) => split[2 + result[0] * 6 + index].split(' ').filter(val => val !== '' && !allnumbers.slice(0, result[1]).includes(val)).reduce((a, b) => Number(a) + Number(b), 0)).reduce((a, b) => Number(a) + Number(b), 0)
         return sum * lastnum;
     }
-
 }
-
-export default S2104;

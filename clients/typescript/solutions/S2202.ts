@@ -1,7 +1,6 @@
 import ISolution from "./ISolution.ts";
 
 export default class S2202 implements ISolution {
-    name = "S2202";
     firstPart(input: string): number {
         const wins: { [key: number]: number } = { 0: 2, 1: 0, 2: 1 };
         return input.split("\n").map(line => {

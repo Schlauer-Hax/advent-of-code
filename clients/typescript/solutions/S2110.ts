@@ -1,7 +1,6 @@
 import ISolution from "./ISolution.ts";
 
 export default class S2110 implements ISolution {
-    name = "S2110";
     firstPart(input: string): number {
         const charmap = {
             '(': ')',
@@ -63,8 +62,7 @@ export default class S2110 implements ISolution {
             '}': 3,
             '>': 4
         } as { [key: string]: number }
-        const answ = results.filter(val => val).map(line => line?.reduce((a, b) => a * 5 + pointsTable[b], 0)).sort((a,b) => a! - b!) as number[];
-        return answ[Math.floor(answ.length/2)];
+        const answ = results.filter(val => val).map(line => line?.reduce((a, b) => a * 5 + pointsTable[b], 0)).sort((a, b) => a! - b!) as number[];
+        return answ[Math.floor(answ.length / 2)];
     }
-
 }

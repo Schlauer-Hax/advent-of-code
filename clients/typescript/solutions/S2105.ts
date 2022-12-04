@@ -1,7 +1,6 @@
 import ISolution from "./ISolution.ts";
 
-export class S2105 implements ISolution {
-    name = 'S2105';
+export default class S2105 implements ISolution {
     firstPart(input: string): number {
         const lines = input.split('\n');
         const array: string[] = [];
@@ -75,22 +74,22 @@ export class S2105 implements ISolution {
             } else {
                 if (y1 > y2) {
                     if (x1 > x2) {
-                        for (let offset = 0; offset <= x1-x2; offset++) {
-                            array.push((x2+offset) + ',' + (y2+offset))
+                        for (let offset = 0; offset <= x1 - x2; offset++) {
+                            array.push((x2 + offset) + ',' + (y2 + offset))
                         }
                     } else {
-                        for (let offset = 0; offset <= x2-x1; offset++) {
-                            array.push((x1+offset) + ',' + (y1-offset))
+                        for (let offset = 0; offset <= x2 - x1; offset++) {
+                            array.push((x1 + offset) + ',' + (y1 - offset))
                         }
                     }
                 } else {
                     if (x1 > x2) {
-                        for (let offset = 0; offset <= x1-x2; offset++) {
-                            array.push((x2+offset) + ',' + (y2-offset))
+                        for (let offset = 0; offset <= x1 - x2; offset++) {
+                            array.push((x2 + offset) + ',' + (y2 - offset))
                         }
                     } else {
-                        for (let offset = 0; offset <= x2-x1; offset++) {
-                            array.push((x1+offset) + ',' + (y1+offset))
+                        for (let offset = 0; offset <= x2 - x1; offset++) {
+                            array.push((x1 + offset) + ',' + (y1 + offset))
                         }
                     }
                 }
@@ -100,7 +99,4 @@ export class S2105 implements ISolution {
         const duplicatesfromduplicates = duplicates.filter((item, index) => duplicates.indexOf(item) !== index);
         return duplicates.length - duplicatesfromduplicates.length;
     }
-
 }
-
-export default S2105;

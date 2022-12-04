@@ -32,5 +32,6 @@ function startWebsocket() {
         setTimeout(startWebsocket, 1000);
     });
 }
-
-startWebsocket();
+runner.loadSolutions().then(() => {
+    startWebsocket();
+});

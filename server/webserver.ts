@@ -63,7 +63,9 @@ export default class WebServer {
 
   updateSolutions(clients = this.clients) {
     clients.forEach(client => {
-      client.send(JSON.stringify({ type: 'solutions', data: this.solutions.map(x => x[1]).reduce((a, b) => a.concat(b), []) }));
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(JSON.stringify({ type: 'solutions', data: this.solutions.map(x => x[1]).reduce((a, b) => a.concat(b), []) }));
+      }
     })
   }
 }
