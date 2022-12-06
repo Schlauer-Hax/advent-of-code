@@ -2,7 +2,7 @@ name: Updater
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
@@ -19,15 +19,15 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Build and push aocserver
         uses: docker/build-push-action@v3
         with:
           context: ./server/
           push: true
           tags: ghcr.io/schlauer-hax/aoc-server
-          labels: 
-            - org.opencontainers.image.source: "https://github.com/Schlauer-Hax/advent-of-code"
+          labels: |
+            org.opencontainers.image.source="https://github.com/Schlauer-Hax/advent-of-code"
 
       - name: Build and push aocts
         uses: docker/build-push-action@v3
@@ -35,8 +35,8 @@ jobs:
           context: ./clients/typescript/
           push: true
           tags: ghcr.io/schlauer-hax/aoc-ts
-          labels: 
-            - org.opencontainers.image.source: "https://github.com/Schlauer-Hax/advent-of-code"
+          labels: |
+            org.opencontainers.image.source="https://github.com/Schlauer-Hax/advent-of-code"
 
       - name: Build and push aocjava
         uses: docker/build-push-action@v3
@@ -44,8 +44,8 @@ jobs:
           context: ./clients/java/
           push: true
           tags: ghcr.io/schlauer-hax/aoc-java
-          labels: 
-            - org.opencontainers.image.source: "https://github.com/Schlauer-Hax/advent-of-code"
+          labels: |
+            org.opencontainers.image.source="https://github.com/Schlauer-Hax/advent-of-code"
 
       - name: Deploying to Docker
         uses: appleboy/ssh-action@master
