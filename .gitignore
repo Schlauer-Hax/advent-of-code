@@ -5,3 +5,4 @@ node_modules/
 .project
 .vscode/
 .DS_Store
+helper/.env
