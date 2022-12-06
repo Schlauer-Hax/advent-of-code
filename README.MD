@@ -1,59 +1,34 @@
 # Advent-of-Code
+
 My Solutions for [Advent of Code](https://adventofcode.com/).
 
 ## What is it exacly?
-This project includes: 
-- A Webserver which serves a Website and a Websocketserver for the Website so everyone can run the code. A Version of it is hosted [on my Site](https://aoc.haxis.me/).
-- A Apiserver which serves a Websocketsocketserver for the Code Runners.
-- Code Runners which run the code that i wrote.
+
+This project consists of:
+
+- A Server which serves a Website, a Websocket for the Website and a Websocket for the solution runners. The Website is also available [on my Site](https://aoc.haxis.me/). (located in `server/`)
+- Solution Runners which run the code I wrote. (located in `clients/`)
+- A Helper which is intented for development which downloads input data and triggers the solutions when they are reloaded. (located in `helper/`)
+- My input data. (located in `data/`)
 
 ## Why tho?
-With this its possible to get the results in the browser, independent of what programming language is being used. 
+
+With this its possible to get the results in the browser, independent of what programming language is being used.
 In summary: Because i was bored and wanted to code the solutions in other languages without anyone noticing.
 
-## What do i need?
-You need the following programs:
-- `JDK 15`
-- `Maven`
-- `Node`
-- `NPM`
-
-That should be everything to start and use everything. To use the start script you need `Screen` installed
-
 ## Running dae Code
-### Simple Mode
-Just use `./startall.sh` which starts all clients, the webserver and the apiserver in screens. **Screen must be installed**
 
-If you want to only start the Web- and Apiserver you can use `./startserver.sh`
+Just use the `docker-compose.yml` which builds and starts all solution runners and the server in containers.
 
-### Manual Mode
-Building the Website:
-1. Change your directory to the website directory `cd website/`
-2. Install packages using npm `npm i`
-3. Build the Website `npm run build`
+If you don't want to build the images yourself, you can use `docker-compose-images.yml` which uses images built by docker.
 
-Copying the Website:
-1. From the root directory change to the server directory `cd server/`
-2. Copy the files `cp -r ../website/build/ ./public/`
+You need to provide a data directory where your solution inputs are located. The filenames are following the naming convention `S[last 2 digits of year][day with 2 digits].txt`
 
-Running the Web- and Apiserver:
-1. In the server directory install packages `npm i`
-2. Run the Server `ts-node index.ts`
+### Changing the webservers port
 
-Running the clients:
+1. Change the port by changing the following section (which can be found in your `docker-compose.yml`) to your needs.
 
-All clients should have a `start.sh` File in their directory which automatically builds and starts the code runners
-
-Example: Starting the Java Client
-1. cd into the directory `cd clients/java/`
-2. Run start.sh `./start.sh`
-
-### Changing Ports
-1. Open the file at `server/index.ts`
-2. Change webport and apiport to ports you want to use
-3. Open the file at `website/src/View.tsx`
-4. Change the url to use the port you specified earlier when setting the webport
-5. Open the file at `clients/java/src/main/java/com/hax/adventofcode/Main.java`
-6. Change the url to use the port you specified earlier when setting the apiport
-
-Thats about it. I'll add a config file for that in the future, maybe.
+   ```yaml
+   ports:
+         - "9000:9000" # host:container - change the host port
+   ```

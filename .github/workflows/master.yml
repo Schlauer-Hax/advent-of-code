@@ -25,21 +25,27 @@ jobs:
         with:
           context: ./server/
           push: true
-          tags: ghcr.io/schlauer-hax/advent-of-code:server
+          tags: ghcr.io/schlauer-hax/aoc-server
+          labels: 
+            - org.opencontainers.image.source: "https://github.com/Schlauer-Hax/advent-of-code"
 
       - name: Build and push aocts
         uses: docker/build-push-action@v3
         with:
           context: ./clients/typescript/
           push: true
-          tags: ghcr.io/schlauer-hax/advent-of-code:ts
+          tags: ghcr.io/schlauer-hax/aoc-ts
+          labels: 
+            - org.opencontainers.image.source: "https://github.com/Schlauer-Hax/advent-of-code"
 
       - name: Build and push aocjava
         uses: docker/build-push-action@v3
         with:
           context: ./clients/java/
           push: true
-          tags: ghcr.io/schlauer-hax/advent-of-code:java
+          tags: ghcr.io/schlauer-hax/aoc-java
+          labels: 
+            - org.opencontainers.image.source: "https://github.com/Schlauer-Hax/advent-of-code"
 
       - name: Deploying to Docker
         uses: appleboy/ssh-action@master

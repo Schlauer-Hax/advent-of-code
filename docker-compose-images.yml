@@ -1,7 +1,7 @@
 services:
   aoc-server:
     container_name: aoc-server
-    build: ./server/
+    image: ghcr.io/schlauer-hax/aoc-server
     ports:
       - "9000:9000"
       - "1337:1337" # for debugging
@@ -9,7 +9,7 @@ services:
       - ./data:/data
   aoc-ts:
     container_name: aoc-ts
-    build: ./clients/typescript/
+    iamge: ghcr.io/schlauer-hax/aoc-ts
     depends_on:
       - aoc-server
     links:
@@ -18,7 +18,7 @@ services:
       - WEBSOCKETURL=ws://aoc-server:1337/
   aoc-java:
     container_name: aoc-java
-    build: ./clients/java/
+    image: ghcr.io/schlauer-hax/aoc-java
     depends_on:
       - aoc-server
     links:
