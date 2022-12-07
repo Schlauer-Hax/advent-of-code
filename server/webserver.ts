@@ -33,7 +33,9 @@ export default class WebServer {
           this.runs.push([id, ws, new Date().getTime()]);
           const clientname = this.solutions.find(solutiondata => solutiondata[1].includes(solution))![0];
           console.log(`running ${solution} with runid ${id} on runner ${clientname}`)
-          apiserver.clients.find(client => client[0] === clientname)![1].send(`aocserver:run:${id}:${solution}:${input}`)
+          const coderunner = apiserver.clients.find(client => client[0] === clientname);
+          if (!coderunner) return;
+          coderunner[1].send(`aocserver:run:${id}:${solution}:${input}`)
         } else if (json.type === 'data') {
           if (!json.name) return;
           Deno.readTextFile(`../data/${json.name}.txt`).then(data => {
