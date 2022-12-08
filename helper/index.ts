@@ -45,11 +45,7 @@ function websocket() {
     } else if (json.type === 'result') {
       console.log(`${json.data}`);
     } else if (json.type === 'data') {
-      ws.send(JSON.stringify({
-        type: 'run',
-        solution: latestsolution,
-        input: json.data
-      }));
+      ws.send(JSON.stringify({type: 'run',solution: latestsolution,input: json.data}));
     }
   };
 
