@@ -34,7 +34,7 @@ function startConnection() {
         } else if (json.type === 'data') {
             document.getElementById('input').value = json.data;
         } else if (json.type === 'result') {
-            document.getElementById('result').innerHTML = `${json.data} - ${json.time}ms`;
+            document.getElementById('result').innerHTML = `${json.data.replaceAll('\n', '<br>')} - ${json.time}ms`;
         }
     }
 
