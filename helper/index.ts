@@ -1,4 +1,5 @@
 import "https://deno.land/x/dotenv@v3.2.0/load.ts";
+import { exists } from "https://deno.land/std@0.208.0/fs/mod.ts";
 
 const date = new Date()
 if (date.getMonth() === 11) {
@@ -25,7 +26,7 @@ function websocket() {
   const ws = new WebSocket('ws://localhost:9000/wss');
 
   let latestsolution: string;
-  ws.onmessage = (event) => {
+  ws.onmessage = async (event) => {
     const json = JSON.parse(event.data);
     if (json.type === 'solutions') {
       console.log('Solutions received, triggering latest solution...');
@@ -34,18 +35,20 @@ function websocket() {
         type: 'data',
         name: latestsolution,
       }));
-      const testinput = Deno.readTextFileSync('./testinput.txt');
-      if (testinput !== '') {
-        ws.send(JSON.stringify({
-          type: 'run',
-          solution: latestsolution,
-          input: testinput,
-        }));
+      if (await exists('./testinput.txt')) {
+        const testinput = Deno.readTextFileSync('./testinput.txt');
+        if (testinput !== '') {
+          ws.send(JSON.stringify({
+            type: 'run',
+            solution: latestsolution,
+            input: testinput,
+          }));
+        }
       }
     } else if (json.type === 'result') {
       console.log(`${json.data}`);
     } else if (json.type === 'data') {
-      ws.send(JSON.stringify({type: 'run',solution: latestsolution,input: json.data}));
+      ws.send(JSON.stringify({ type: 'run', solution: latestsolution, input: json.data }));
     }
   };
 
