@@ -1,4 +1,4 @@
-import { serve } from "https://deno.land/std/http/mod.ts";
+import { serve } from "https://deno.land/std@0.190.0/http/mod.ts";
 import WebServer from "./webserver.ts";
 
 export default class ApiServer {

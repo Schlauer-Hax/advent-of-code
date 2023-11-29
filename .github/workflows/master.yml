@@ -47,6 +47,16 @@ jobs:
           labels: |
             org.opencontainers.image.source="https://github.com/Schlauer-Hax/advent-of-code"
 
+      - name: Upload data
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          source: ./data/
+          target: ${{ secrets.DATA_PATH }}
+
       - name: Deploying to Docker
         uses: appleboy/ssh-action@master
         with:
@@ -54,4 +64,4 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-          script: /root/advent-of-code/deploy.sh
+          script: ${{ secrets.DEPLOY_SCRIPT }}

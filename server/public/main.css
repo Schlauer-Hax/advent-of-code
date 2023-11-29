@@ -17,7 +17,7 @@ body {
 .dropdown  {
     background-color: #282c34;
     color: white;
-    border: 1px solid transparent;
+    border: 1px solid white;
     width: 50%;
     height: 30px;
 }

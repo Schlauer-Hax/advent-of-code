@@ -9,7 +9,7 @@ services:
       - ./data:/data
   aoc-ts:
     container_name: aoc-ts
-    iamge: ghcr.io/schlauer-hax/aoc-ts
+    image: ghcr.io/schlauer-hax/aoc-ts
     depends_on:
       - aoc-server
     links:
