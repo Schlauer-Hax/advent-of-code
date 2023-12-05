@@ -5,7 +5,7 @@ const runner = new Runner();
 
 function startWebsocket() {
     const ws = new WebSocket(Deno.env.get("WEBSOCKETURL") ?? 'ws://localhost:1337/');
-    ws.addEventListener('message', (data) => {
+    ws.addEventListener('message', async (data) => {
         const message = data.data;
         const split = message.split(':');
         if (split[0] !== 'aocserver') return;
@@ -17,7 +17,7 @@ function startWebsocket() {
             const data = split.slice(4).join(':');
             const solution = split[3];
             console.log(`running ${solution} with runid ${runid}`);
-            const result = runner.run(solution, data);
+            const result = await runner.run(solution, data);
             ws.send(`aocclient:ts:result:${runid}:[${result[0]}, ${result[1]}]`);
         }
     });
