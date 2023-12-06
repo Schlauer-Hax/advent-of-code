@@ -18,6 +18,7 @@ function startWebsocket() {
             const solution = split[3];
             console.log(`running ${solution} with runid ${runid}`);
             const result = await runner.run(solution, data);
+            console.log(`result for ${solution} with runid ${runid}: ${result}`)
             ws.send(`aocclient:ts:result:${runid}:[${result[0]}, ${result[1]}]`);
         }
     });
