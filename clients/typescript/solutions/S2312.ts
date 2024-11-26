@@ -11,11 +11,12 @@ export default class S2312 implements ISolution {
         }).reduce((a, b) => a + b, 0);
     }
     async secondPart(input: string): Promise<string | number> {
-        const list = input.split('\n');
-        return (await Promise.all(list.map(line => {
-            const [map, rule] = line.split(' ');
-            return routine(tryGroups, [map, map, map, map, map].join('?'), [rule, rule, rule, rule, rule].join(',').split(',').map(Number), 0, 0, []);
-        }))).reduce((a, b) => a + b, 0);
+        // const list = input.split('\n');
+        // return (await Promise.all(list.map(line => {
+        //     const [map, rule] = line.split(' ');
+        //     return routine(tryGroups, [map, map, map, map, map].join('?'), [rule, rule, rule, rule, rule].join(',').split(',').map(Number), 0, 0, []);
+        // }))).reduce((a, b) => a + b, 0);
+        return 0;
     }
 }
 
