@@ -31,10 +31,10 @@ function websocket() {
     if (json.type === 'solutions') {
       console.log('Solutions received, triggering latest solution...');
       latestsolution = json.data.sort((a: string, b: string) => Number(b.replace('S', '')) - Number(a.replace('S', '')))[0]
-      ws.send(JSON.stringify({
-        type: 'data',
-        name: latestsolution,
-      }));
+        ws.send(JSON.stringify({
+          type: 'data',
+          name: latestsolution,
+        }));
       if (await exists('./testinput.txt')) {
         const testinput = Deno.readTextFileSync('./testinput.txt');
         if (testinput !== '') {

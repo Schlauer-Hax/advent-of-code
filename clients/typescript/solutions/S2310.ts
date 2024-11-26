@@ -1,5 +1,5 @@
 import ISolution from "./ISolution.ts";
-import { createCanvas } from "https://deno.land/x/canvas/mod.ts";
+import { createCanvas } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
 
 export default class S2309 implements ISolution {
     firstPart(input: string): string | number {
@@ -72,6 +72,5 @@ function connected(matrix: string[][], [x, y]: [number, number]): [number, numbe
     if (['J', '-', '7', 'S'].includes(matrix[y][x]) && ['L', '-', 'F'].includes(matrix[y][x-1])) {
         possible.push([x-1, y]);
     }
-    // @ts-ignore
-    return possible;
+    return possible as [number, number][];
 }
