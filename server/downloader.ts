@@ -10,7 +10,7 @@ export async function downloadMissingData(solutions: string[]) {
         const day = missingsolution.slice(3);
         console.log('Starting download of ' + missingsolution);
         await fetch(
-            `https://adventofcode.com/20${year}/day/${day}/input`,
+            `https://adventofcode.com/20${year}/day/${Number(day)}/input`,
             {
                 headers: {
                     cookie: "session=" + Deno.env.get("AOC_SESSION"),
