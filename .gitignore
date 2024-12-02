@@ -5,7 +5,7 @@ node_modules/
 .project
 .vscode/
 .DS_Store
-helper/.env
+.env
 helper/testinput.txt
 deno.lock
 data/

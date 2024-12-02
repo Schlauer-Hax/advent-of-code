@@ -1,4 +1,4 @@
-import "https://deno.land/x/dotenv@v3.2.0/load.ts";
+import "jsr:@std/dotenv/load";
 import { exists } from "https://deno.land/std@0.208.0/fs/mod.ts";
 
 const date = new Date()

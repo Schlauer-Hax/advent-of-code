@@ -1,5 +1,5 @@
 import Runner from './runner.ts';
-import "https://deno.land/x/dotenv@v3.2.0/load.ts";
+import "jsr:@std/dotenv/load";
 
 const runner = new Runner();
 

@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/mod.ts";
 import WebServer from "./webserver.ts";
+import { downloadMissingData } from "./downloader.ts";
 
 export default class ApiServer {
     clients: [string, WebSocket][] = [];
@@ -37,6 +38,7 @@ export default class ApiServer {
                     if (messagedata === 'solutions') {
                         webserver.solutions = webserver.solutions.filter(solution => solution[0] !== clientname)
                         webserver.solutions.push([clientname, split[3].split(', ')]);
+                        downloadMissingData(webserver.solutions.map(sol => sol[1]).flat());
                         webserver.updateSolutions();
                     }
                 }
