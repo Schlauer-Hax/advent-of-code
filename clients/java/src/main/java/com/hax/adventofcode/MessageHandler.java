@@ -2,6 +2,7 @@ package com.hax.adventofcode;
 
 import java.util.Arrays;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
 
 public class MessageHandler {
 
@@ -26,9 +27,12 @@ public class MessageHandler {
             String name = messagearray[3];
             String data = String.join(":",Arrays.copyOfRange(messagearray, 4, messagearray.length));
             System.out.println("Running solution "+name+" with runid "+runid);
-            CompletableFuture.supplyAsync(() ->
-                    solutionRunner.runClass(name, data)).thenAccept((result) -> {
-                client.send("aocclient:java:result:"+runid+":"+ Arrays.toString(result));
+            CompletableFuture.supplyAsync(() -> {
+                long start = System.nanoTime();
+                String[] result = solutionRunner.runClass(name, data);
+                long end = System.nanoTime();
+                client.send("aocclient:java:result:"+runid+":"+ (end-start)/1e6 +":"+ Arrays.toString(result));
+                return result;
             });
         }
     }

@@ -5,7 +5,7 @@ import ApiServer from "./apiserver.ts";
 export default class WebServer {
   solutions: [string, string[]][] = [];
   clients: WebSocket[] = [];
-  runs: [number, WebSocket, number][] = [];
+  runs: [number, WebSocket][] = [];
 
   startServer(apiserver: ApiServer) {
     const app = new Application();
@@ -30,7 +30,7 @@ export default class WebServer {
 
           if (!(input && solution)) return;
           const id = Math.round(Math.random() * 100000)
-          this.runs.push([id, ws, new Date().getTime()]);
+          this.runs.push([id, ws]);
           const clientname = this.solutions.find(solutiondata => solutiondata[1].includes(solution))![0];
           console.log(`running ${solution} with runid ${id} on runner ${clientname}`)
           const coderunner = apiserver.clients.find(client => client[0] === clientname);

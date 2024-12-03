@@ -12,7 +12,7 @@ export default class ApiServer {
             const { socket: ws, response } = Deno.upgradeWebSocket(req);
 
             ws.onmessage = (e) => {
-                const msg = e.data.toString();
+                const msg: string = e.data.toString();
                 const split = msg.split(':');
 
                 // Code Runner Requests
@@ -30,10 +30,11 @@ export default class ApiServer {
                     }
                     if (messagedata === 'result') {
                         const id = Number(split[3]);
-                        const result = split.slice(4).join(':');
-                        console.log(`${clientname} got result ${result} with runid ${id}`)
+                        const time = Number(split[4]);
+                        const result = split.slice(5).join(':');
+                        console.log(`${clientname} got result ${result} with runid ${id} in ${time}ms`);
                         const run = webserver.runs.find(run => run[0] === id)!;
-                        run[1].send(JSON.stringify({ type: 'result', data: result, time: new Date().getTime() - run[2] }));
+                        run[1].send(JSON.stringify({ type: 'result', data: result, time: time }));
                     }
                     if (messagedata === 'solutions') {
                         webserver.solutions = webserver.solutions.filter(solution => solution[0] !== clientname)
