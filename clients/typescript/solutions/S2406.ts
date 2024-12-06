@@ -73,6 +73,7 @@ export default class S2406 implements ISolution {
         const coords = input.split("\n").map(line => line.split(""));
         function tryWith(coords: string[][]): number {
             const poss: {x: number, y: number}[] = [];
+            const turn: {x: number, y: number, t: string}[] = [];
             let direction = "up";
             const currentPos = { x: 0, y: 0 };
             for (const y in coords) {
@@ -85,8 +86,7 @@ export default class S2406 implements ISolution {
             }
             poss.push({ x: currentPos.x, y: currentPos.y });
             walk: while (true) {
-                if (poss.length - poss.filter((pos, index) => poss.findIndex(p => p.x === pos.x && p.y === pos.y) === index).length > coords.length * coords[ 0 ].length) {
-                    console.log("probably infinite loop");
+                if (turn.some((t, i) => turn.findIndex(tt => tt.x === t.x && tt.y === t.y && tt.t === t.t) !== i)) {
                     return 1;
                 }
                 switch (direction) {
@@ -96,9 +96,9 @@ export default class S2406 implements ISolution {
                         }
                         if (coords[ currentPos.y - 1 ][ currentPos.x ] === "#") {
                             direction = "right";
+                            turn.push({ x: currentPos.x, y: currentPos.y, t: "right" });
                         } else {
                             currentPos.y--;
-                            poss.push({ x: currentPos.x, y: currentPos.y });
                         }
                         break;
                     case "right":
@@ -107,9 +107,9 @@ export default class S2406 implements ISolution {
                         }
                         if (coords[ currentPos.y ][ currentPos.x + 1 ] === "#") {
                             direction = "down";
+                            turn.push({ x: currentPos.x, y: currentPos.y, t: "down" });
                         } else {
                             currentPos.x++;
-                            poss.push({ x: currentPos.x, y: currentPos.y });
                         }
                         break;
                     case "down":
@@ -118,9 +118,9 @@ export default class S2406 implements ISolution {
                         }
                         if (coords[ currentPos.y + 1 ][ currentPos.x ] === "#") {
                             direction = "left";
+                            turn.push({ x: currentPos.x, y: currentPos.y, t: "left" });
                         } else {
                             currentPos.y++;
-                            poss.push({ x: currentPos.x, y: currentPos.y });
                         }
                         break;
                     case "left":
@@ -129,9 +129,9 @@ export default class S2406 implements ISolution {
                         }
                         if (coords[ currentPos.y ][ currentPos.x - 1 ] === "#") {
                             direction = "up";
+                            turn.push({ x: currentPos.x, y: currentPos.y, t: "up" });
                         } else {
                             currentPos.x--;
-                            poss.push({ x: currentPos.x, y: currentPos.y });
                         }
                         break;
 
