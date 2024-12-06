@@ -16,7 +16,7 @@ This project consists of:
 With this its possible to get the results in the browser, independent of what programming language is being used.
 In summary: Because i was bored and wanted to code the solutions in other languages without anyone noticing.
 
-## Running dae Code
+## Running the Code
 
 Just use the `docker-compose.yml` which builds and starts all solution runners and the server in containers.
 
