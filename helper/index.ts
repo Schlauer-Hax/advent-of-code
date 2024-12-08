@@ -49,7 +49,10 @@ function websocket() {
         }
       }
       if (keypress.key === 'v') {
-        const input = await paste();
+        let input = await paste();
+        if (input.endsWith('\n')) {
+          input = input.slice(0, -1);
+        }
         Deno.writeTextFileSync("testinput.txt", input);
         console.log('Copied clipboard to testinput.txt');
         sendTestInput();
