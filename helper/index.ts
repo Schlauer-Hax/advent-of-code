@@ -50,7 +50,8 @@ function websocket() {
       }
       if (keypress.key === 'v') {
         let input = await paste();
-        if (input.endsWith('\n')) {
+        input = input.replaceAll('\r\n', '\n');
+        while (input.endsWith('\n')) {
           input = input.slice(0, -1);
         }
         Deno.writeTextFileSync("testinput.txt", input);
