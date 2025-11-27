@@ -1,7 +1,7 @@
-import "jsr:@std/dotenv/load";
-import { exists } from "https://deno.land/std@0.208.0/fs/mod.ts";
-import { readKeypress } from "https://deno.land/x/keypress@0.0.11/mod.ts";
-import { paste } from 'https://deno.land/x/clipboard/mod.ts';
+import "@std/dotenv/load";
+import { exists } from "@std/fs";
+import { readKeypress } from "keypress";
+import { paste } from 'clipboard';
 
 let realinput = false;
 console.log('Connecting to websocket...');

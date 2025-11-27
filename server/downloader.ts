@@ -1,4 +1,4 @@
-import "jsr:@std/dotenv/load";
+import "@std/dotenv/load";
 
 export async function downloadMissingData(solutions: string[]) {
     const files = Array.from(Deno.readDirSync("../data"));

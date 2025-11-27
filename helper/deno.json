@@ -1,0 +1,9 @@
+{
+  "imports": {
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.5",
+    "@std/fs": "jsr:@std/fs@^1.0.20",
+    "keypress": "https://deno.land/x/keypress@0.0.11/mod.ts",
+    "clipboard": "https://deno.land/x/clipboard@v0.0.3/mod.ts"
+  },
+  "lock": false
+}

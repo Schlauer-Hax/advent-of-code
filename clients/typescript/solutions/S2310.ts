@@ -1,5 +1,5 @@
 import ISolution from "./ISolution.ts";
-import { createCanvas } from "https://deno.land/x/canvas@v1.4.2/mod.ts";
+import { createCanvas } from "@gfx/canvas";
 
 export default class S2309 implements ISolution {
     firstPart(input: string): string | number {

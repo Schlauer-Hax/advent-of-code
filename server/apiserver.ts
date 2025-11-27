@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/std@0.190.0/http/mod.ts";
 import WebServer from "./webserver.ts";
 import { downloadMissingData } from "./downloader.ts";
 
@@ -6,7 +5,7 @@ export default class ApiServer {
     clients: [string, WebSocket][] = [];
 
     startServer(webserver: WebServer) {
-        serve((req: Request) => {
+        Deno.serve({ port: 1337 }, (req) => {
             if (req.headers.get("Upgrade") !== "websocket") return new Response("Not Found", { status: 404 });
             
             const { socket: ws, response } = Deno.upgradeWebSocket(req);
@@ -50,7 +49,6 @@ export default class ApiServer {
             }
 
             return response;
-
-        }, { port: 1337 });
+        });
     }
 }

@@ -1,5 +1,5 @@
 import ISolution from "./ISolution.ts";
-import routine from "https://deno.land/x/routine/mod.ts";
+import routine from "routine";
 
 export default class S2312 implements ISolution {
     firstPart(input: string): string | number {
