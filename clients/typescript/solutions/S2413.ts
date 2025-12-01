@@ -1,5 +1,5 @@
 import ISolution from "./ISolution.ts";
-import * as mathjs from "npm:mathjs";
+import * as mathjs from "mathjs";
 
 export default class S2413 implements ISolution {
     firstPart(input: string): (number | string) | Promise<number | string> {
