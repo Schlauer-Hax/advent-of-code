@@ -48,7 +48,6 @@ export default class S2502 implements ISolution {
                     }
                 }
             }
-            console.log(highest);
             return highest;
         }).reduce((a, b) => a + b, 0);
     }
