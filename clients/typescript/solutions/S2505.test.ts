@@ -2,6 +2,27 @@ import S2505 from "./S2505.ts";
 import { assertEquals } from "@std/assert";
 
 const solution = new S2505();
+const testinput = 
+`3-5
+10-14
+16-20
+12-18
+
+1
+5
+8
+11
+17
+32`;
+
+Deno.test("Testinput first part", () => {
+    assertEquals(solution.firstPart(testinput), 3);
+});
+
+Deno.test("Testinput second part", () => {
+    assertEquals(solution.secondPart(testinput), 14);
+});
+
 
 Deno.test("Overlapping chain merges all", () => {
     assertEquals(solution.secondPart(`1-4\n3-7\n6-9\n\n2\n4\n6\n8`), 9);

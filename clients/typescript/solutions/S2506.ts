@@ -1,6 +1,6 @@
 import ISolution from "./ISolution.ts";
 
-export default class S2505 implements ISolution {
+export default class S2506 implements ISolution {
     firstPart(input: string): string | number {
         const out = input.split("\n").map(line => line.split(" ").filter(word => word != ""));
         let sumsum = 0;

@@ -1,7 +1,7 @@
 import ISolution from "./ISolution.ts";
 
 export default class S2507 implements ISolution {
-    makeConnections(input: string, shortest: number) {
+    makeConnections(input: string) {
         const positions = input.split("\n").map(line => line.split(",").map(Number));
 
         // Calculate all distances between all positions
@@ -19,6 +19,7 @@ export default class S2507 implements ISolution {
         // console.log(lengths);
 
         // Find shortest distances
+        const shortest = input.split("\n").length < 50 ? 10 : 1000;
         let mins: { from: string; to: string; distance: number }[] = [];
         for (const [ key, map ] of lengths) {
             for (const [ key2, distance ] of map) {
@@ -57,11 +58,11 @@ export default class S2507 implements ISolution {
         return { connections, lengths, positions };
     }
     firstPart(input: string): string | number {
-        const { connections } = this.makeConnections(input, 1000);
+        const { connections } = this.makeConnections(input);
         return connections.map(conn => conn.size).sort((a,b) => a - b).reverse().slice(0,3).reduce((a, b) => a * b, 1);
     }
     secondPart(input: string): string | number {
-        const { connections, lengths } = this.makeConnections(input, 1000);
+        const { connections, lengths } = this.makeConnections(input);
         const connectionsWithId = connections.map((conn, i) => ({ id: i, conn }));
         let minConnectionLengths: { fromid: number; toid: number; from: string; to: string; distance: number }[] = [];
         const computeMinConnections = (filter?: number) => {
