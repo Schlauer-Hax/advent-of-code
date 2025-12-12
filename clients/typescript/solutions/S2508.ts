@@ -1,6 +1,6 @@
 import ISolution from "./ISolution.ts";
 
-export default class S2507 implements ISolution {
+export default class S2508 implements ISolution {
     makeConnections(input: string) {
         const positions = input.split("\n").map(line => line.split(",").map(Number));
 
