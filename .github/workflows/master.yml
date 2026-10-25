@@ -47,11 +47,9 @@ jobs:
           labels: |
             org.opencontainers.image.source="https://github.com/Schlauer-Hax/advent-of-code"
 
-      - name: Deploying to Docker
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.KEY }}
-          port: ${{ secrets.PORT }}
-          script: ${{ secrets.DEPLOY_SCRIPT }}
+      - name: Deploy
+        env:
+          HOOK_SECRET: ${{ secrets.DEPLOY_HOOK_SECRET }}
+        run: |
+          sig=$(printf '{}' | openssl dgst -sha256 -hmac "$HOOK_SECRET" | awk '{print $NF}')
+          curl -sS --fail-with-body --max-time 600 -X POST -H 'Content-Type: application/json' -H "X-Signature: sha256=$sig" -d '{}' https://haxis.me/hooks/aoc
